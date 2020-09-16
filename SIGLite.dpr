@@ -8,7 +8,8 @@ uses
   dm.SIGLite in 'data\dm.SIGLite.pas' {dm_SIGLite: TDataModule},
   Common.ENum in '..\SisGeF5\Common\Common.ENum.pas',
   Common.Utils in '..\SisGeF5\Common\Common.Utils.pas',
-  Global.Parametros in '..\SisGeF5\Common\Global.Parametros.pas';
+  Global.Parametros in '..\SisGeF5\Common\Global.Parametros.pas',
+  View.Login in 'view\View.Login.pas' {view_login};
 
 {$R *.res}
 

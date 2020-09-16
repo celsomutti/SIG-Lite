@@ -1,16 +1,16 @@
-object view_Main: Tview_Main
+object view_login: Tview_login
   Left = 0
   Top = 0
-  Caption = 'Main'
-  ClientHeight = 491
-  ClientWidth = 777
+  BorderStyle = bsSizeToolWin
+  Caption = 'Login'
+  ClientHeight = 349
+  ClientWidth = 477
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
   Font.Height = -13
   Font.Name = 'Segoe UI'
   Font.Style = []
-  FormStyle = fsMDIForm
   Icon.Data = {
     0000010004003030000001002000A8250000460000002020000001002000A810
     0000EE2500001818000001002000880900009636000010100000010020006804
@@ -561,215 +561,240 @@ object view_Main: Tview_Main
     FF00FFFFFF00FC3F0000F00F0000E00700000003000080010000000000000000
     00000000000000000000000000000000000080010000C0010000E0030000F007
     0000FC3F0000}
+  KeyPreview = True
   OldCreateOrder = False
-  WindowState = wsMaximized
+  Position = poDesktopCenter
+  ShowHint = True
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
   TextHeight = 17
-  object ribbonMain: TdxRibbon
+  object layoutControlPadrao: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 777
-    Height = 122
-    Cursor = crHandPoint
-    BarManager = barManagerMain
-    Style = rs2013
-    ColorSchemeAccent = rcsaBlue
-    ColorSchemeName = 'DarkGray'
-    Contexts = <>
-    TabAreaToolbar.Toolbar = barManagerMainBarAplicacao
+    Width = 477
+    Height = 349
+    Align = alClient
     TabOrder = 0
-    TabStop = False
-    object ribbonMainTabExpressas: TdxRibbonTab
-      Active = True
-      Caption = 'Expressas'
-      Groups = <
+    ExplicitWidth = 792
+    ExplicitHeight = 536
+    object labelTitle: TcxLabel
+      Left = 187
+      Top = 88
+      Caption = 'labelTitle'
+      ParentFont = False
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -16
+      Style.Font.Name = 'Segoe UI Semibold'
+      Style.Font.Style = [fsBold]
+      Style.HotTrack = False
+      Style.IsFontAssigned = True
+      Transparent = True
+    end
+    object textEditUsuario: TcxTextEdit
+      Left = 146
+      Top = 155
+      Hint = 'Informe o login'
+      Properties.MaxLength = 30
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      TabOrder = 1
+      Width = 185
+    end
+    object buttonEditSenha: TcxButtonEdit
+      Left = 146
+      Top = 211
+      Hint = 'Informe a senha'
+      Properties.Buttons = <
         item
-          Caption = 'Expressas'
-          ToolbarName = 'barManagerMainBarExpressas'
+          Action = actionVisualizarSenha
+          Default = True
+          Kind = bkGlyph
         end>
+      Properties.EchoMode = eemPassword
+      Properties.Images = dm_SIGLite.imageList16_16
+      Properties.MaxLength = 160
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.ButtonStyle = bts3D
+      TabOrder = 2
+      Width = 185
+    end
+    object buttonEntrar: TcxButton
+      Left = 146
+      Top = 244
+      Width = 90
+      Height = 25
+      Cursor = crHandPoint
+      Action = actionEntrar
+      TabOrder = 3
+    end
+    object buttonCancelar: TcxButton
+      Left = 244
+      Top = 244
+      Width = 87
+      Height = 25
+      Cursor = crHandPoint
+      Action = actionCancelar
+      Cancel = True
+      TabOrder = 4
+    end
+    object layoutControlPadraoGroup_Root: TdxLayoutGroup
+      AlignHorz = ahClient
+      AlignVert = avClient
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      ShowBorder = False
+      Index = -1
+    end
+    object layoutGroupLogin: TdxLayoutGroup
+      Parent = layoutControlPadraoGroup_Root
+      AlignHorz = ahCenter
+      AlignVert = avCenter
+      CaptionOptions.Text = 'Login'
+      CaptionOptions.Visible = False
+      SizeOptions.AssignedValues = [sovSizableHorz]
+      SizeOptions.SizableHorz = False
+      ButtonOptions.Buttons = <>
+      ItemIndex = 3
       Index = 0
     end
-    object ribbonMainTabSistema: TdxRibbonTab
-      Caption = 'Sistema'
-      Groups = <
-        item
-          Caption = 'Sistema'
-          ToolbarName = 'barManagerMainBarSistema'
-        end>
+    object layoutItemTitle: TdxLayoutItem
+      Parent = layoutGroupLogin
+      CaptionOptions.Glyph.SourceDPI = 96
+      CaptionOptions.Glyph.Data = {
+        89504E470D0A1A0A0000000D49484452000000240000002408020000006E620F
+        CF000000017352474200AECE1CE90000000467414D410000B18F0BFC61050000
+        00097048597300000EC300000EC301C76FA864000005BF494441545847ED565D
+        4C544714BEBFECB2CB0A54DA2A28D43F5814572DA829B4406B4CA9C48AB1B536
+        F14122E9431FFD49A44F3EB44D1ADBA6499F7C5162ED8F0D25C468436B6A6834
+        10519B06705930FCEFCA0AC2222CECDFBD77FACD9DF5EE7605036DF5A91F9799
+        3367CE9C6FCE9933033C21847B5610A2FD33C1FF64FF09FE09196A0A45657C5A
+        3840C22126AB7A3B1F165D8DB0E6394E991C0DFFF8A5D27A59BB3FC0AB1A5444
+        9485EC5CB974AFE9DD6382246B73C5B16832EC3DF0C941A5B99EB7A571B28913
+        254ACE7CA8113E14D466A792F61F33D77C0C35BE782C820C76DAC4C8F4E1CD3C
+        60B612B4D19947201CE1F1C3697E9F90916539D381E0E2E35B28198C94A98999
+        033982ED3942A3798C8921CAC7E320914CEB0F03D0896C2A9E0C023CB8DDEECE
+        CECE8A8A8A5028D4E5EA1E1FF7699A9699B97CC37AFBC3032FF14425A2691E9E
+        1828233C07FCC26A87F5F35F8DE0625182E9E8D1A32B56AC00537B7BE7F96F2F
+        747438BDDEFBC3C3EEE4E79787BFFB940FF817C204808976C9296A678BD2D6A4
+        EB28E648E3E8D8838B177F4E49B1C2AF86AAE2B9F7DFDBF7B032955B92C1D3BD
+        2D80ED113425225A5353CEB4235AEC80AE667C478E1C999D9D85100C04444140
+        A0C8ABAA2AABEDEB49DB650E0A01348B608253419454CFDDC8D8208B55DFAA9E
+        9AEAEA6AC69A9DBD32236369301884BDA6A999D93991B65F38D9A22F5F04E094
+        5601EAB6ED0A5B49C99C5D2EB41B376EECEDED6D6E6E86BC7BF75B8E4D05018A
+        F092748B32D8C5490241CE29DF22286910A2AC0C3A594228D9D090A7F9F76B10
+        1C0E476D6D6D777737E42D9B1CD5870E9696169B7159470638FF14170AF09A06
+        4ABA8E6121D4C8BFDF178B2C100CF6F50D5CBFDE02B9B5B5352F2F4F55D553A7
+        4E61986FCF35719CE59CCB5C7B567EF90D128990F111E29F24C159A22AB8BEF4
+        0E3F198468C929B1C820252727F70F0CD5FFD4383D3D0D8D288A63636348380E
+        920E05D1F4DA3ECB47DFA4D6BB2DE79CE60FBF904ADEE64D56F2709CF73DD028
+        F70C898488A622CF2CDAE8875F551533D7502A10A1287EBBDAECF58E8AA2844D
+        E09456ADCA29297925499631DDD8D85855558562A9A9A9A93D716243410194F0
+        60A45219B8A3B8DAD4BE0EADB75DC5D14E4DF05828489C24F2828C6DAAD39329
+        5F5F97D66EC6124AE672F5B4DDBC6D329958352287783E56AECC2A2ADC929E9E
+        0E0DAE042EC6E9D3A7215756565EBA7489F2FC1D74A5DE2A8377F8A11ED5D3AB
+        0CBB88BB8F78EFDA2E0C632A4A06E96CDD796492AAF46B00A5AA6AE170C8664B
+        B1DBF30A36E443097847C7FEB87573D7AE5D9061B96CD98B7BF654EDD8B1E3D5
+        9292E59999CC261E708D57C1781BC593274FA293646978C823491223438B6B2D
+        494988D2EDF6E0C5CACB5D17FCFEB3B46D65EB72F3E1024665E5E5D853434343
+        5D5D5D9EDD5E58588885E5E5E5FDFDFD7EBF1F794A4B4B83991097F5D87375E5
+        CAD57B235E18313E1D740AF3C160A8E4F5F2B5E34EDFA19DF2B62D52D93B49A5
+        7BC5EC68B80650C9C5C5C5D1810EA7D3999F1F338B92A105476BEB8D2E570FF8
+        508D60848EF145146566C65FF3C161EDC6E599DADDBC3515EF1867328B9BCAC4
+        A2374D453B856539BAB7285A5A5A9A9A9A70BADBB76F8FAA74C42263F0F9266F
+        DDFED3E3B9A7D3D34DC8B2B466CDEAAD5B0B2591263FE2ED0F1CAF20135ECE62
+        A3512B61120A0A662B9F5F243B4A85DC4279DD66DEB694794B40229901DCF448
+        388CAA91F53B00B0E89975F85A43B8FE2BB5E7360E17B7126F28170A81582C28
+        96F71F379556192761802E9F8FEC09A02B7467E8B5C12E1A2527082F64F1596B
+        A1C40C9CA2C6A8451CF0479892313E83D528483664C06C82E671302F6898A5E1
+        D618E269D598162A36610C134C0D6502D8D47C30DC5219370912280581BE9300
+        9B4B70C1ACE7F4CBA6126010B0254CA634E8E2C99E0618779460CEDDFD7B80C3
+        008673A47121608B0163975177F36F1A06F41F1B488AA2B0B1AE8F226108308D
+        A18F37809F273001308E1502043A7E3AF9A4E0B8BF00EF7F0E63B273CE0E0000
+        000049454E44AE426082}
+      Control = labelTitle
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 46
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object layoutItemUsuario: TdxLayoutItem
+      Parent = layoutGroupLogin
+      CaptionOptions.Text = 'Usu'#225'rio:'
+      CaptionOptions.Layout = clTop
+      Control = textEditUsuario
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 121
+      ControlOptions.ShowBorder = False
       Index = 1
     end
-  end
-  object statusBarMain: TdxStatusBar
-    Left = 0
-    Top = 471
-    Width = 777
-    Height = 20
-    Panels = <>
-    PaintStyle = stpsUseLookAndFeel
-    LookAndFeel.Kind = lfUltraFlat
-    LookAndFeel.NativeStyle = True
-    LookAndFeel.SkinName = ''
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
-    Font.Style = []
-  end
-  object barManagerMain: TdxBarManager
-    Font.Charset = DEFAULT_CHARSET
-    Font.Color = clWindowText
-    Font.Height = -12
-    Font.Name = 'Segoe UI'
-    Font.Style = []
-    Categories.Strings = (
-      'Default')
-    Categories.ItemsVisibles = (
-      2)
-    Categories.Visibles = (
-      True)
-    ImageOptions.LargeImages = dm_SIGLite.imageListMain
-    PopupMenuLinks = <>
-    UseSystemFont = True
-    Left = 584
-    Top = 112
-    PixelsPerInch = 96
-    object barManagerMainBarExpressas: TdxBar
-      Caption = 'Expressas'
-      CaptionButtons = <>
-      DockedLeft = 0
-      DockedTop = 0
-      FloatLeft = 805
-      FloatTop = 2
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton2'
-        end
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton3'
-        end>
-      OneOnRow = True
-      Row = 0
-      UseOwnFont = False
-      UseRestSpace = True
-      Visible = True
-      WholeRow = False
+    object layoutItemSenha: TdxLayoutItem
+      Parent = layoutGroupLogin
+      CaptionOptions.Text = 'Senha:'
+      CaptionOptions.Layout = clTop
+      Control = buttonEditSenha
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 121
+      ControlOptions.ShowBorder = False
+      Index = 2
     end
-    object barManagerMainBarSistema: TdxBar
-      Caption = 'Sistema'
-      CaptionButtons = <>
-      DockedLeft = 0
-      DockedTop = 0
-      FloatLeft = 805
-      FloatTop = 2
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'dxBarLargeButton4'
-        end>
-      OneOnRow = True
-      Row = 0
-      UseOwnFont = False
-      UseRestSpace = True
-      Visible = True
-      WholeRow = False
+    object layoutItemEntrar: TdxLayoutItem
+      Parent = dxLayoutAutoCreatedGroup1
+      AlignHorz = ahLeft
+      AlignVert = avBottom
+      CaptionOptions.Text = 'cxButton1'
+      CaptionOptions.Visible = False
+      Control = buttonEntrar
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 90
+      ControlOptions.ShowBorder = False
+      Index = 0
     end
-    object barManagerMainBarAplicacao: TdxBar
-      Caption = 'Aplica'#231#227'o'
-      CaptionButtons = <>
-      DockedLeft = 0
-      DockedTop = 0
-      FloatLeft = 805
-      FloatTop = 2
-      FloatClientWidth = 0
-      FloatClientHeight = 0
-      Images = dm_SIGLite.imageList16_16
-      ItemLinks = <
-        item
-          Visible = True
-          ItemName = 'dxBarButton4'
-        end>
-      OneOnRow = True
-      Row = 0
-      UseOwnFont = False
-      Visible = True
-      WholeRow = False
+    object layoutItemCancelar: TdxLayoutItem
+      Parent = dxLayoutAutoCreatedGroup1
+      AlignHorz = ahRight
+      AlignVert = avBottom
+      CaptionOptions.Text = 'cxButton1'
+      CaptionOptions.Visible = False
+      Control = buttonCancelar
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 87
+      ControlOptions.ShowBorder = False
+      Index = 1
     end
-    object dxBarLargeButton2: TdxBarLargeButton
-      Action = actionEntregas
-      Category = 0
-    end
-    object dxBarLargeButton3: TdxBarLargeButton
-      Action = actionExtrato
-      Category = 0
-    end
-    object dxBarLargeButton4: TdxBarLargeButton
-      Action = actionSenha
-      Category = 0
-    end
-    object dxBarButton1: TdxBarButton
-      Caption = 'New Button'
-      Category = 0
-      Hint = 'New Button'
-      Visible = ivAlways
-    end
-    object dxBarButton2: TdxBarButton
-      Caption = 'Fechar'
-      Category = 0
-      Hint = 'Fechar o sistema'
-      Visible = ivAlways
-      ImageIndex = 2
-    end
-    object dxBarButton3: TdxBarButton
-      Action = actionFechar
-      Align = iaRight
-      Category = 0
-      PaintStyle = psCaptionGlyph
-    end
-    object dxBarButton4: TdxBarButton
-      Action = actionFechar
-      Category = 0
-      PaintStyle = psCaptionGlyph
+    object dxLayoutAutoCreatedGroup1: TdxLayoutAutoCreatedGroup
+      Parent = layoutGroupLogin
+      AlignVert = avBottom
+      LayoutDirection = ldHorizontal
+      Index = 3
+      AutoCreated = True
     end
   end
-  object actionListMain: TActionList
-    Left = 680
-    Top = 112
-    object actionEntregas: TAction
-      Caption = 'Entregas'
-      Hint = 'Controle de entregas realizadas'
-      ImageIndex = 0
+  object actionListLogin: TActionList
+    Images = dm_SIGLite.imageList16_16
+    Left = 24
+    Top = 8
+    object actionVisualizarSenha: TAction
+      Caption = 'Visualizar'
+      Hint = 'Visualizar a senha'
+      ImageIndex = 5
+      OnExecute = actionVisualizarSenhaExecute
     end
-    object actionExtrato: TAction
-      Caption = 'Extrato'
-      Hint = 'Extrato de expressas'
+    object actionEntrar: TAction
+      Caption = 'Entrar'
+      Hint = 'Entrar'
+      ImageIndex = 6
+      OnExecute = actionEntrarExecute
+    end
+    object actionCancelar: TAction
+      Caption = 'Cancelar'
+      Hint = 'Cancelar'
       ImageIndex = 1
+      OnExecute = actionCancelarExecute
     end
-    object actionSenha: TAction
-      Caption = 'Senha'
-      Hint = 'Alterar a senha'
-      ImageIndex = 2
-    end
-    object actionFechar: TAction
-      Caption = '&Fechar'
-      Hint = 'Fechar a aplica'#231#227'o'
-      ImageIndex = 2
-      OnExecute = actionFecharExecute
-    end
-  end
-  object dxTabbedMDIManagerMain: TdxTabbedMDIManager
-    Active = True
-    FormCaptionMask = '[ChildFormCaption]'
-    TabProperties.CustomButtons.Buttons = <>
-    Left = 584
-    Top = 176
-    PixelsPerInch = 96
   end
 end

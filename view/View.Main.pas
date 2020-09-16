@@ -36,6 +36,7 @@ type
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
   private
     { Private declarations }
+    procedure Login;
   public
     { Public declarations }
   end;
@@ -47,7 +48,7 @@ implementation
 
 {$R *.dfm}
 
-uses dm.SIGLite;
+uses dm.SIGLite, View.Login;
 
 procedure Tview_Main.actionFecharExecute(Sender: TObject);
 begin
@@ -63,6 +64,19 @@ end;
 procedure Tview_Main.FormShow(Sender: TObject);
 begin
   Self.Caption := Application.Title;
+  Login;
+end;
+
+procedure Tview_Main.Login;
+begin
+if not Assigned(view_login) then
+  begin
+    view_login := Tview_login.Create(Application);
+  end;
+  if view_login.ShowModal = mrCancel then
+  begin
+    Application.Terminate;
+  end;
 end;
 
 end.
