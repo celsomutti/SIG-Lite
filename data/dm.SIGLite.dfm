@@ -611,4 +611,35 @@ object dm_SIGLite: Tdm_SIGLite
           426082}
       end>
   end
+  object RESTClient: TRESTClient
+    Accept = 'application/json, text/plain; q=0.9, text/html;q=0.8,'
+    AcceptCharset = 'utf-8, *;q=0.8'
+    BaseURL = 'http://localhost/api/SIGLite/sl_login.php'
+    Params = <>
+    RaiseExceptionOn500 = False
+    Left = 32
+    Top = 16
+  end
+  object RESTRequest: TRESTRequest
+    Client = RESTClient
+    Method = rmPOST
+    Params = <
+      item
+        Name = 'username'
+        Value = 'celso.mutti'
+      end
+      item
+        Name = 'password'
+        Value = 'pereira'
+      end>
+    Response = RESTResponse
+    SynchronizedEvents = False
+    Left = 32
+    Top = 72
+  end
+  object RESTResponse: TRESTResponse
+    ContentType = 'application/json'
+    Left = 32
+    Top = 128
+  end
 end

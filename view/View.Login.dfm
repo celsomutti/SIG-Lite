@@ -576,11 +576,9 @@ object view_login: Tview_login
     Height = 349
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 792
-    ExplicitHeight = 536
     object labelTitle: TcxLabel
-      Left = 187
-      Top = 88
+      Left = 104
+      Top = 63
       Caption = 'labelTitle'
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
@@ -593,19 +591,19 @@ object view_login: Tview_login
       Transparent = True
     end
     object textEditUsuario: TcxTextEdit
-      Left = 146
-      Top = 155
+      Left = 63
+      Top = 130
       Hint = 'Informe o login'
       Properties.MaxLength = 30
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 1
-      Width = 185
+      Width = 351
     end
     object buttonEditSenha: TcxButtonEdit
-      Left = 146
-      Top = 211
+      Left = 63
+      Top = 186
       Hint = 'Informe a senha'
       Properties.Buttons = <
         item
@@ -621,11 +619,11 @@ object view_login: Tview_login
       Style.HotTrack = False
       Style.ButtonStyle = bts3D
       TabOrder = 2
-      Width = 185
+      Width = 351
     end
     object buttonEntrar: TcxButton
-      Left = 146
-      Top = 244
+      Left = 63
+      Top = 261
       Width = 90
       Height = 25
       Cursor = crHandPoint
@@ -633,8 +631,8 @@ object view_login: Tview_login
       TabOrder = 3
     end
     object buttonCancelar: TcxButton
-      Left = 244
-      Top = 244
+      Left = 327
+      Top = 261
       Width = 87
       Height = 25
       Cursor = crHandPoint
@@ -647,19 +645,25 @@ object view_login: Tview_login
       AlignVert = avClient
       ButtonOptions.Buttons = <>
       Hidden = True
+      Padding.Bottom = 50
+      Padding.Left = 50
+      Padding.Right = 50
+      Padding.Top = 50
+      Padding.AssignedValues = [lpavBottom, lpavLeft, lpavRight, lpavTop]
       ShowBorder = False
       Index = -1
     end
     object layoutGroupLogin: TdxLayoutGroup
       Parent = layoutControlPadraoGroup_Root
-      AlignHorz = ahCenter
-      AlignVert = avCenter
+      AlignHorz = ahClient
+      AlignVert = avClient
       CaptionOptions.Text = 'Login'
       CaptionOptions.Visible = False
       SizeOptions.AssignedValues = [sovSizableHorz]
       SizeOptions.SizableHorz = False
       ButtonOptions.Buttons = <>
       ItemIndex = 3
+      ShowBorder = False
       Index = 0
     end
     object layoutItemTitle: TdxLayoutItem

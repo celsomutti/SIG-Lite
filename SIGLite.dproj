@@ -120,6 +120,17 @@
             <Form>view_login</Form>
             <FormType>dfm</FormType>
         </DCCReference>
+        <DCCReference Include="model\Model.RESTLogin.pas"/>
+        <DCCReference Include="common\Common.Params.pas"/>
+        <DCCReference Include="controller\Controller.RESTLogin.pas"/>
+        <DCCReference Include="model\Model.RESTLoginAgente.pas"/>
+        <DCCReference Include="controller\Controller.RESTLoginAgente.pas"/>
+        <DCCReference Include="model\Model.RESTBases.pas"/>
+        <DCCReference Include="controller\Controller.RESTBases.pas"/>
+        <DCCReference Include="view\View.AcompanhamentoEntregas.pas">
+            <Form>view_AcompanhamntoEntregas</Form>
+            <FormType>dfm</FormType>
+        </DCCReference>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

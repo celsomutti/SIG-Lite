@@ -7,7 +7,7 @@ object view_Main: Tview_Main
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
-  Font.Height = -13
+  Font.Height = -16
   Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsMDIForm
@@ -561,12 +561,14 @@ object view_Main: Tview_Main
     FF00FFFFFF00FC3F0000F00F0000E00700000003000080010000000000000000
     00000000000000000000000000000000000080010000C0010000E0030000F007
     0000FC3F0000}
+  KeyPreview = True
   OldCreateOrder = False
-  WindowState = wsMaximized
+  ShowHint = True
   OnClose = FormClose
+  OnCloseQuery = FormCloseQuery
   OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 17
+  TextHeight = 21
   object ribbonMain: TdxRibbon
     Left = 0
     Top = 0
@@ -606,15 +608,70 @@ object view_Main: Tview_Main
     Top = 471
     Width = 777
     Height = 20
-    Panels = <>
+    Panels = <
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.Font.Charset = ANSI_CHARSET
+        PanelStyle.Font.Color = clMaroon
+        PanelStyle.Font.Height = -13
+        PanelStyle.Font.Name = 'Segoe UI'
+        PanelStyle.Font.Style = [fsBold]
+        PanelStyle.ParentFont = False
+        Fixed = False
+        Text = 'Base'
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.Alignment = taCenter
+        PanelStyle.Font.Charset = ANSI_CHARSET
+        PanelStyle.Font.Color = clWindowText
+        PanelStyle.Font.Height = -13
+        PanelStyle.Font.Name = 'Segoe UI Semibold'
+        PanelStyle.Font.Style = [fsBold]
+        PanelStyle.ParentFont = False
+        Fixed = False
+        Text = 'Usu'#225'rio'
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarTextPanelStyle'
+        PanelStyle.Alignment = taCenter
+        PanelStyle.Font.Charset = ANSI_CHARSET
+        PanelStyle.Font.Color = clWindowText
+        PanelStyle.Font.Height = -13
+        PanelStyle.Font.Name = 'Segoe UI Semibold'
+        PanelStyle.Font.Style = [fsBold]
+        PanelStyle.ParentFont = False
+        Fixed = False
+        Text = 'Calendario'
+      end
+      item
+        PanelStyleClassName = 'TdxStatusBarKeyboardStatePanelStyle'
+        PanelStyle.Font.Charset = ANSI_CHARSET
+        PanelStyle.Font.Color = clWindowText
+        PanelStyle.Font.Height = -13
+        PanelStyle.Font.Name = 'Segoe UI Semibold'
+        PanelStyle.Font.Style = [fsBold]
+        PanelStyle.CapsLockKeyAppearance.ActiveCaption = 'CAPS'
+        PanelStyle.CapsLockKeyAppearance.InactiveCaption = 'CAPS'
+        PanelStyle.NumLockKeyAppearance.ActiveCaption = 'NUM'
+        PanelStyle.NumLockKeyAppearance.InactiveCaption = 'NUM'
+        PanelStyle.ScrollLockKeyAppearance.ActiveCaption = 'SCRL'
+        PanelStyle.ScrollLockKeyAppearance.InactiveCaption = 'SCRL'
+        PanelStyle.InsertKeyAppearance.ActiveFontColor = clMaroon
+        PanelStyle.InsertKeyAppearance.InactiveFontColor = clWindowText
+        PanelStyle.InsertKeyAppearance.ActiveCaption = 'OVR'
+        PanelStyle.InsertKeyAppearance.InactiveCaption = 'INS'
+        PanelStyle.ParentFont = False
+        Text = 'State'
+      end>
     PaintStyle = stpsUseLookAndFeel
     LookAndFeel.Kind = lfUltraFlat
     LookAndFeel.NativeStyle = True
     LookAndFeel.SkinName = ''
-    Font.Charset = DEFAULT_CHARSET
+    Font.Charset = ANSI_CHARSET
     Font.Color = clWindowText
-    Font.Height = -11
-    Font.Name = 'Tahoma'
+    Font.Height = -13
+    Font.Name = 'Segoe UI'
     Font.Style = []
   end
   object barManagerMain: TdxBarManager
@@ -746,6 +803,7 @@ object view_Main: Tview_Main
       Caption = 'Entregas'
       Hint = 'Controle de entregas realizadas'
       ImageIndex = 0
+      OnExecute = actionEntregasExecute
     end
     object actionExtrato: TAction
       Caption = 'Extrato'
@@ -764,12 +822,18 @@ object view_Main: Tview_Main
       OnExecute = actionFecharExecute
     end
   end
-  object dxTabbedMDIManagerMain: TdxTabbedMDIManager
-    Active = True
-    FormCaptionMask = '[ChildFormCaption]'
+  object timer: TTimer
+    OnTimer = timerTimer
+    Left = 576
+    Top = 248
+  end
+  object dxTabbedMDIManager: TdxTabbedMDIManager
+    Active = False
+    LookAndFeel.SkinName = 'UserSkin'
+    FormCaptionMask = '[MainFormCaption]'
     TabProperties.CustomButtons.Buttons = <>
-    Left = 584
-    Top = 176
+    Left = 581
+    Top = 184
     PixelsPerInch = 96
   end
 end
