@@ -11,7 +11,9 @@ var
   paramEntregadorAtivo: System.Integer;
   paramEMailEntregador: System.string;
   paramCodigoCadastro: System.Integer;
+  paramCodigoEntregador: System.Integer;
   paramNomeBase : System.string;
+  paramTipoUsuario: System.string;
 implementation
 
 end.

@@ -17,7 +17,9 @@ uses
   Controller.RESTLoginAgente in 'controller\Controller.RESTLoginAgente.pas',
   Model.RESTBases in 'model\Model.RESTBases.pas',
   Controller.RESTBases in 'controller\Controller.RESTBases.pas',
-  View.AcompanhamentoEntregas in 'view\View.AcompanhamentoEntregas.pas' {view_AcompanhamntoEntregas};
+  View.AcompanhamentoEntregas in 'view\View.AcompanhamentoEntregas.pas' {view_AcompanhamntoEntregas},
+  Model.RESTEntregadores in 'model\Model.RESTEntregadores.pas',
+  Controller.RESTEntregadores in 'controller\Controller.RESTEntregadores.pas';
 
 {$R *.res}
 

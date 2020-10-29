@@ -6,7 +6,7 @@ uses
   Winapi.Windows, Winapi.Messages, System.SysUtils, System.Variants, System.Classes, Vcl.Graphics,
   Vcl.Controls, Vcl.Forms, Vcl.Dialogs, cxGraphics, cxControls, cxLookAndFeels, cxLookAndFeelPainters, dxRibbonSkins, dxSkinsCore,
   dxSkinsDefaultPainters, dxRibbonCustomizationForm, cxClasses, dxBar, dxStatusBar, dxRibbon, System.Actions, Vcl.ActnList, cxPC,
-  dxBarBuiltInMenu, dxTabbedMDI, Vcl.ExtCtrls, Controller.RESTBases;
+  dxBarBuiltInMenu, dxTabbedMDI, Vcl.ExtCtrls, Controller.RESTBases, Controller.RESTEntregadores;
 
 type
   Tview_Main = class(TForm)
@@ -43,6 +43,7 @@ type
     procedure Login;
     procedure Resizeform;
     procedure NomeAgente(iAgente: integer);
+    procedure NomeEntregador(ientregador: integer);
   public
     { Public declarations }
   end;
@@ -98,9 +99,26 @@ begin
   begin
     Application.Terminate;
   end;
-  NomeAgente(Common.Params.paramCodeDelivery);
+
+  Common.Params.paramTipoUsuario := 'X';
   statusBarMain.Panels[1].Text := 'Usuário: ' + Global.Parametros.pUser_Name;
-  statusBarMain.Panels[0].Text := 'Base: ' + Common.Params.paramCodeDelivery.ToString + ' - ' + Common.Params.paramNameUser;
+  if Common.Params.paramCodeDelivery <> 0 then
+  begin
+    Common.Params.paramTipoUsuario := 'B';
+    NomeAgente(Common.Params.paramCodeDelivery);
+    statusBarMain.Panels[0].Text := 'Base: ' + Common.Params.paramCodeDelivery.ToString + ' - ' + Common.Params.paramNameUser;
+  end
+  else if Common.Params.paramCodigoEntregador <> 0 then
+  begin
+    Common.Params.paramTipoUsuario := 'E';
+    NomeEntregador(Common.Params.paramCodigoEntregador);
+    statusBarMain.Panels[0].Text := 'Entregador: ' + Common.Params.paramCodigoEntregador.ToString + ' - ' +
+                                    Common.Params.paramNameUser;
+  end
+  else
+  begin
+    statusBarMain.Panels[0].Text := '';
+  end;
 end;
 
 procedure Tview_Main.NomeAgente(iAgente: integer);
@@ -115,6 +133,21 @@ begin
     end;
   finally
     FBase.Free;
+  end;
+end;
+
+procedure Tview_Main.NomeEntregador(ientregador: integer);
+var
+  FEntregador : TRESTEntregadoresController;
+begin
+  try
+    FEntregador := TRESTEntregadoresController.Create;
+    if FEntregador.RetornaNomeEntregador(Common.Params.paramCodigoEntregador) then
+    begin
+      Application.MessageBox('Entregador não encontrado.', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    end;
+  finally
+    FEntregador.Free;
   end;
 end;
 
