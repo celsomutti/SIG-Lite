@@ -11,7 +11,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function SearchEntregas(sentregador, sdataini, sdatafim: String): Boolean;
+    function SearchEntregas(stipo, scodigo, sdataini, sdatafim: String): Boolean;
   end;
 
 implementation
@@ -29,9 +29,9 @@ begin
   inherited;
 end;
 
-function TRESTEntregassController.SearchEntregas(sentregador, sdataini, sdatafim: String): Boolean;
+function TRESTEntregassController.SearchEntregas(stipo, scodigo, sdataini, sdatafim: String): Boolean;
 begin
-  Result := FExtratos.SearchEntregas(sEntregador, sdataini, sdatafim);
+  Result := FExtratos.SearchEntregas(stipo, scodigo, sdataini, sdatafim);
 end;
 
 end.

@@ -3,13 +3,13 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Acompanhamento de Entregas Realizadas'
-  ClientHeight = 484
-  ClientWidth = 803
+  ClientHeight = 581
+  ClientWidth = 1123
   Color = clBtnFace
-  Font.Charset = DEFAULT_CHARSET
+  Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
-  Font.Height = -11
-  Font.Name = 'Tahoma'
+  Font.Height = -13
+  Font.Name = 'Segoe UI'
   Font.Style = []
   FormStyle = fsMDIChild
   KeyPreview = True
@@ -17,6 +17,196 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
   ShowHint = True
   Visible = True
   OnClose = FormClose
+  OnShow = FormShow
   PixelsPerInch = 96
-  TextHeight = 13
+  TextHeight = 17
+  object layoutControlMain: TdxLayoutControl
+    Left = 0
+    Top = 0
+    Width = 1123
+    Height = 581
+    Align = alClient
+    TabOrder = 0
+    object comboBoxMeses: TcxComboBox
+      Left = 129
+      Top = 59
+      Hint = 'Selecione o m'#234's.'
+      Properties.DropDownListStyle = lsEditFixedList
+      Properties.Items.Strings = (
+        'Selecione ...'
+        'Janeiro'
+        'Fevereiro'
+        'Mar'#231'o'
+        'Abril'
+        'Maio'
+        'Junho'
+        'Julho'
+        'Agosto'
+        'Setembro'
+        'Outubro'
+        'Novembro'
+        'Dezembro')
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      TabOrder = 1
+      Text = 'Selecione ...'
+      Width = 141
+    end
+    object comboBoxPeriodos: TcxComboBox
+      Left = 278
+      Top = 59
+      Hint = 'Selecione a quinzena.'
+      Properties.DropDownListStyle = lsEditFixedList
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      TabOrder = 2
+      Width = 208
+    end
+    object buttonPesquisar: TcxButton
+      Left = 494
+      Top = 59
+      Width = 104
+      Height = 25
+      Cursor = crHandPoint
+      Action = actionPesquisar
+      TabOrder = 3
+    end
+    object comboBoxAno: TcxComboBox
+      Left = 28
+      Top = 59
+      Hint = 'Selecione o ano'
+      Properties.DropDownListStyle = lsEditFixedList
+      Properties.Items.Strings = (
+        'Selecione ...'
+        '2019'
+        '2020'
+        '2021'
+        '2022')
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.ButtonStyle = bts3D
+      Style.PopupBorderStyle = epbsFrame3D
+      TabOrder = 0
+      Text = 'Selecione ...'
+      Width = 93
+    end
+    object cxGrid: TcxGrid
+      Left = 13
+      Top = 130
+      Width = 1097
+      Height = 200
+      TabOrder = 4
+      object cxGridDBTableView1: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsGrid
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+      end
+      object cxGridLevel1: TcxGridLevel
+        GridView = cxGridDBTableView1
+      end
+    end
+    object layoutControlMainGroup_Root: TdxLayoutGroup
+      AlignHorz = ahClient
+      AlignVert = avClient
+      ButtonOptions.Buttons = <>
+      Hidden = True
+      ItemIndex = 1
+      ShowBorder = False
+      Index = -1
+    end
+    object layoutGroupCriterios: TdxLayoutGroup
+      Parent = layoutControlMainGroup_Root
+      AlignHorz = ahClient
+      AlignVert = avTop
+      CaptionOptions.Text = 'Crit'#233'rios'
+      ButtonOptions.Buttons = <>
+      LayoutDirection = ldHorizontal
+      Index = 0
+    end
+    object bayoutItemComboBoxMeses: TdxLayoutItem
+      Parent = layoutGroupCriterios
+      AlignHorz = ahLeft
+      AlignVert = avTop
+      CaptionOptions.Text = 'M'#234's:'
+      CaptionOptions.Layout = clTop
+      Control = comboBoxMeses
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 141
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object layoutItemComboBoxPeriodos: TdxLayoutItem
+      Parent = layoutGroupCriterios
+      AlignHorz = ahLeft
+      AlignVert = avClient
+      CaptionOptions.Text = 'Quinzenas:'
+      CaptionOptions.Layout = clTop
+      Control = comboBoxPeriodos
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 208
+      ControlOptions.ShowBorder = False
+      Index = 2
+    end
+    object layoutItemButtonPesquisar: TdxLayoutItem
+      Parent = layoutGroupCriterios
+      AlignHorz = ahLeft
+      AlignVert = avBottom
+      CaptionOptions.Text = 'cxButton1'
+      CaptionOptions.Visible = False
+      CaptionOptions.Layout = clTop
+      Control = buttonPesquisar
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 104
+      ControlOptions.ShowBorder = False
+      Index = 3
+    end
+    object layoutItemComboBoxAno: TdxLayoutItem
+      Parent = layoutGroupCriterios
+      AlignVert = avClient
+      CaptionOptions.Text = 'Ano:'
+      CaptionOptions.Layout = clTop
+      Control = comboBoxAno
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 93
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object layoutItemGrid: TdxLayoutItem
+      Parent = layoutControlMainGroup_Root
+      AlignHorz = ahClient
+      AlignVert = avTop
+      CaptionOptions.Text = 'Entregas'
+      CaptionOptions.Layout = clTop
+      Control = cxGrid
+      ControlOptions.OriginalHeight = 200
+      ControlOptions.OriginalWidth = 250
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+  end
+  object actionListEntregas: TActionList
+    Images = dm_SIGLite.imageList16_16
+    Left = 784
+    object actionPesquisar: TAction
+      Caption = 'Pesquisar'
+      Hint = 'Pesquisar Periodo'
+      ImageIndex = 7
+      OnExecute = actionPesquisarExecute
+    end
+  end
+  object dsGrid: TDataSource
+    AutoEdit = False
+    DataSet = dm_SIGLite.fdMemTabEntregas
+    Left = 544
+    Top = 24
+  end
 end

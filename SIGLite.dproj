@@ -133,6 +133,10 @@
         </DCCReference>
         <DCCReference Include="model\Model.RESTEntregadores.pas"/>
         <DCCReference Include="controller\Controller.RESTEntregadores.pas"/>
+        <DCCReference Include="model\Model.RESTPeriodos.pas"/>
+        <DCCReference Include="controller\Controller.RESTPeriodos.pas"/>
+        <DCCReference Include="model\Model.RESTEentregas.pas"/>
+        <DCCReference Include="controller\Controller.RESTEntregas.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

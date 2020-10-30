@@ -19,7 +19,11 @@ uses
   Controller.RESTBases in 'controller\Controller.RESTBases.pas',
   View.AcompanhamentoEntregas in 'view\View.AcompanhamentoEntregas.pas' {view_AcompanhamntoEntregas},
   Model.RESTEntregadores in 'model\Model.RESTEntregadores.pas',
-  Controller.RESTEntregadores in 'controller\Controller.RESTEntregadores.pas';
+  Controller.RESTEntregadores in 'controller\Controller.RESTEntregadores.pas',
+  Model.RESTPeriodos in 'model\Model.RESTPeriodos.pas',
+  Controller.RESTPeriodos in 'controller\Controller.RESTPeriodos.pas',
+  Model.RESTEentregas in 'model\Model.RESTEentregas.pas',
+  Controller.RESTEntregas in 'controller\Controller.RESTEntregas.pas';
 
 {$R *.res}
 
