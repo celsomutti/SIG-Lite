@@ -101,25 +101,59 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
       Left = 13
       Top = 130
       Width = 1097
-      Height = 200
-      TabOrder = 4
+      Height = 405
+      TabOrder = 5
       object cxGridDBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dsGrid
         DataController.Summary.DefaultGroupSummaryItems = <>
         DataController.Summary.FooterSummaryItems = <>
         DataController.Summary.SummaryGroups = <>
+        OptionsView.ColumnAutoWidth = True
+        OptionsView.GroupByBox = False
+        OptionsView.Indicator = True
       end
       object cxGridLevel1: TcxGridLevel
         GridView = cxGridDBTableView1
       end
+    end
+    object labelPeriodo: TcxLabel
+      Left = 1087
+      Top = 63
+      ParentFont = False
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -13
+      Style.Font.Name = 'Segoe UI Semibold'
+      Style.Font.Style = [fsBold]
+      Style.HotTrack = False
+      Style.IsFontAssigned = True
+      Transparent = True
+    end
+    object buttonExportar: TcxButton
+      Left = 13
+      Top = 543
+      Width = 92
+      Height = 25
+      Cursor = crHandPoint
+      Action = actionExportar
+      TabOrder = 6
+    end
+    object buttonFechar: TcxButton
+      Left = 1016
+      Top = 543
+      Width = 94
+      Height = 25
+      Cursor = crHandPoint
+      Action = actionFechar
+      TabOrder = 7
     end
     object layoutControlMainGroup_Root: TdxLayoutGroup
       AlignHorz = ahClient
       AlignVert = avClient
       ButtonOptions.Buttons = <>
       Hidden = True
-      ItemIndex = 1
+      ItemIndex = 2
       ShowBorder = False
       Index = -1
     end
@@ -183,7 +217,7 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
     object layoutItemGrid: TdxLayoutItem
       Parent = layoutControlMainGroup_Root
       AlignHorz = ahClient
-      AlignVert = avTop
+      AlignVert = avClient
       CaptionOptions.Text = 'Entregas'
       CaptionOptions.Layout = clTop
       Control = cxGrid
@@ -191,6 +225,50 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
       ControlOptions.OriginalWidth = 250
       ControlOptions.ShowBorder = False
       Index = 1
+    end
+    object layoutItemLabelPeriodo: TdxLayoutItem
+      Parent = layoutGroupCriterios
+      AlignHorz = ahRight
+      AlignVert = avBottom
+      CaptionOptions.Text = 'cxLabel1'
+      CaptionOptions.Visible = False
+      CaptionOptions.Layout = clTop
+      Control = labelPeriodo
+      ControlOptions.OriginalHeight = 21
+      ControlOptions.OriginalWidth = 8
+      ControlOptions.ShowBorder = False
+      Index = 4
+    end
+    object layoutItemButtonExportar: TdxLayoutItem
+      Parent = dxLayoutAutoCreatedGroup1
+      AlignHorz = ahLeft
+      AlignVert = avBottom
+      CaptionOptions.Text = 'cxButton1'
+      CaptionOptions.Visible = False
+      Control = buttonExportar
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 92
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object layoutItemButtonFechar: TdxLayoutItem
+      Parent = dxLayoutAutoCreatedGroup1
+      AlignHorz = ahRight
+      AlignVert = avBottom
+      CaptionOptions.Text = 'cxButton2'
+      CaptionOptions.Visible = False
+      Control = buttonFechar
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 94
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutAutoCreatedGroup1: TdxLayoutAutoCreatedGroup
+      Parent = layoutControlMainGroup_Root
+      AlignVert = avBottom
+      LayoutDirection = ldHorizontal
+      Index = 2
+      AutoCreated = True
     end
   end
   object actionListEntregas: TActionList
@@ -202,11 +280,27 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
       ImageIndex = 7
       OnExecute = actionPesquisarExecute
     end
+    object actionExportar: TAction
+      Caption = 'Exportar'
+      Hint = 'Exportar dados'
+      ImageIndex = 4
+      OnExecute = actionExportarExecute
+    end
+    object actionFechar: TAction
+      Caption = 'Fechar'
+      Hint = 'Fechar a tela'
+      ImageIndex = 2
+      OnExecute = actionFecharExecute
+    end
   end
   object dsGrid: TDataSource
     AutoEdit = False
     DataSet = dm_SIGLite.fdMemTabEntregas
     Left = 544
     Top = 24
+  end
+  object SaveDialog: TSaveDialog
+    Left = 608
+    Top = 32
   end
 end

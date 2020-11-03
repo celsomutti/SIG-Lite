@@ -809,6 +809,7 @@ object view_Main: Tview_Main
       Caption = 'Extrato'
       Hint = 'Extrato de expressas'
       ImageIndex = 1
+      OnExecute = actionExtratoExecute
     end
     object actionSenha: TAction
       Caption = 'Senha'

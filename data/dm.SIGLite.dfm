@@ -690,7 +690,17 @@ object dm_SIGLite: Tdm_SIGLite
     ResourceOptions.SilentMode = True
     UpdateOptions.AssignedValues = [uvCheckRequired]
     UpdateOptions.CheckRequired = False
-    Left = 24
-    Top = 248
+    Left = 184
+    Top = 16
+  end
+  object fdMemTableExtrato: TFDMemTable
+    FetchOptions.AssignedValues = [evMode]
+    FetchOptions.Mode = fmAll
+    ResourceOptions.AssignedValues = [rvSilentMode]
+    ResourceOptions.SilentMode = True
+    UpdateOptions.AssignedValues = [uvCheckRequired]
+    UpdateOptions.CheckRequired = False
+    Left = 272
+    Top = 16
   end
 end

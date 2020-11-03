@@ -11,7 +11,7 @@ uses
   Controller.RESTPeriodos, dxLayoutControlAdapters, Vcl.Menus, Vcl.StdCtrls, cxButtons, System.Actions, Vcl.ActnList, System.DateUtils,
   Controller.RESTEntregas, cxStyles, cxCustomData, cxFilter, cxData, cxDataStorage, cxNavigator, dxDateRanges,
   cxDataControllerConditionalFormattingRulesManagerDialog, cxDBData, cxGridLevel, cxGridCustomView, cxGridCustomTableView,
-  cxGridTableView, cxGridDBTableView, cxGrid;
+  cxGridTableView, cxGridDBTableView, cxGrid, cxLabel;
 
 type
   Tview_AcompanhamntoEntregas = class(TForm)
@@ -33,15 +33,29 @@ type
     cxGrid: TcxGrid;
     layoutItemGrid: TdxLayoutItem;
     dsGrid: TDataSource;
+    labelPeriodo: TcxLabel;
+    layoutItemLabelPeriodo: TdxLayoutItem;
+    actionExportar: TAction;
+    actionFechar: TAction;
+    buttonExportar: TcxButton;
+    layoutItemButtonExportar: TdxLayoutItem;
+    buttonFechar: TcxButton;
+    layoutItemButtonFechar: TdxLayoutItem;
+    dxLayoutAutoCreatedGroup1: TdxLayoutAutoCreatedGroup;
+    SaveDialog: TSaveDialog;
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure FormShow(Sender: TObject);
     procedure actionPesquisarExecute(Sender: TObject);
+    procedure actionExportarExecute(Sender: TObject);
+    procedure actionFecharExecute(Sender: TObject);
   private
     { Private declarations }
+    function ValidaPesquisa(): Boolean;
     procedure PopulaPeriodos;
     procedure MontaPeriodo(iAno, iMes, iQuinzena: Integer);
     procedure SetupAno();
     procedure PesquisaEntregas();
+    procedure ExportarDados;
   public
     { Public declarations }
   end;
@@ -54,15 +68,46 @@ implementation
 
 {$R *.dfm}
 
-uses dm.SIGLite, Common.Params;
+uses dm.SIGLite, Common.Params, Common.Utils;
+
+procedure Tview_AcompanhamntoEntregas.actionExportarExecute(Sender: TObject);
+begin
+  if cxGridDBTableView1.ColumnCount = 0 then
+  begin
+    Application.MessageBox('Não existemn dados para exportar!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Exit;
+  end;
+  ExportarDados;
+end;
+
+procedure Tview_AcompanhamntoEntregas.actionFecharExecute(Sender: TObject);
+begin
+  Close;
+end;
 
 procedure Tview_AcompanhamntoEntregas.actionPesquisarExecute(Sender: TObject);
 begin
-  PesquisaEntregas;
+  if ValidaPesquisa() then
+  begin
+    PesquisaEntregas;
+  end;
+end;
+
+procedure Tview_AcompanhamntoEntregas.ExportarDados;
+begin
+  SaveDialog.Filter := '';
+  SaveDialog.Filter := 'Excel (*.xls) |*.xls|XML (*.xml) |*.xml|Arquivo Texto (*.txt) |*.txt|Página Web (*.html)|*.html|Arquivo separado por virgulas (*.csv)|*.csv';
+  SaveDialog.Title := 'Exportar Dados';
+  SaveDialog.DefaultExt := 'xls';
+  if SaveDialog.Execute then
+  begin
+    TUtils.ExportarDados(cxGrid, SaveDialog.FileName);
+  end;
 end;
 
 procedure Tview_AcompanhamntoEntregas.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
+  if dm_SIGLite.fdMemTabEntregas.Active then dm_SIGLite.fdMemTabEntregas.Close;
   Action := caFree;
   view_AcompanhamntoEntregas := nil;
 end;
@@ -71,6 +116,7 @@ procedure Tview_AcompanhamntoEntregas.FormShow(Sender: TObject);
 begin
   SetupAno;
   PopulaPeriodos;
+  cxGridDBTableView1.ClearItems;
 end;
 
 procedure Tview_AcompanhamntoEntregas.PesquisaEntregas;
@@ -80,6 +126,12 @@ var
 begin
   try
     FEntregas := TRESTEntregassController.Create;
+    if dm_SIGLite.fdMemTabEntregas.Active then
+    begin
+      dm_SIGLite.fdMemTabEntregas.Close;
+    end;
+    cxGridDBTableView1.ClearItems;
+    labelPeriodo.Caption := '';
     stipo := Common.Params.paramTipoUsuario;
     MontaPeriodo(StrToInt(comboBoxAno.Text), comboBoxMeses.ItemIndex, StrToInt(Copy(comboBoxPeriodos.Text,0,1)));
     if sTipo = 'B' then
@@ -98,7 +150,12 @@ begin
     end
     else
     begin
-
+      cxGridDBTableView1.DataController.CreateAllItems();
+      cxGridDBTableView1.Columns[1].MinWidth := 190;
+      cxGridDBTableView1.Columns[2].MinWidth := 70;
+      labelPeriodo.Caption := 'Período de ' + FormatDateTime('dd/mm/yyyy', dtDataInicial) + ' a ' +
+                              FormatDateTime('dd/mm/yyyy', dtDataFinal);
+      cxGrid.SetFocus;
     end;
   finally
     FEntregas.Free;
@@ -136,6 +193,30 @@ begin
   iMes := MonthOf(dtData);
   comboBoxAno.Text := sAno;
   comboBoxMeses.ItemIndex := iMes;
+end;
+
+function Tview_AcompanhamntoEntregas.ValidaPesquisa: Boolean;
+begin
+  Result := False;
+  if comboBoxAno.ItemIndex <= 0 then
+  begin
+    Application.MessageBox('Selecione o ano.','Atenção!', MB_OK + MB_ICONEXCLAMATION);
+    comboBoxAno.SetFocus;
+    Exit;
+  end;
+  if comboBoxMeses.ItemIndex <= 0 then
+  begin
+    Application.MessageBox('Selecione o mês.','Atenção!', MB_OK + MB_ICONEXCLAMATION);
+    comboBoxMeses.SetFocus;
+    Exit;
+  end;
+  if comboBoxPeriodos.ItemIndex <= 0 then
+  begin
+    Application.MessageBox('Selecione o período.','Atenção!', MB_OK + MB_ICONEXCLAMATION);
+    comboBoxPeriodos.SetFocus;
+    Exit;
+  end;
+  Result := True;
 end;
 
 procedure Tview_AcompanhamntoEntregas.MontaPeriodo(iAno, iMes, iQuinzena: Integer);

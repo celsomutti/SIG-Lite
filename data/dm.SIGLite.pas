@@ -16,6 +16,7 @@ type
     RESTResponse: TRESTResponse;
     RESTResponseDataSetAdapter: TRESTResponseDataSetAdapter;
     fdMemTabEntregas: TFDMemTable;
+    fdMemTableExtrato: TFDMemTable;
   private
     { Private declarations }
   public

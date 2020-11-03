@@ -38,6 +38,7 @@ type
     procedure timerTimer(Sender: TObject);
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actionEntregasExecute(Sender: TObject);
+    procedure actionExtratoExecute(Sender: TObject);
   private
     { Private declarations }
     procedure Login;
@@ -55,7 +56,7 @@ implementation
 
 {$R *.dfm}
 
-uses dm.SIGLite, View.Login, Common.Params, Global.Parametros, View.AcompanhamentoEntregas;
+uses dm.SIGLite, View.Login, Common.Params, Global.Parametros, View.AcompanhamentoEntregas, View.Extrato;
 
 procedure Tview_Main.actionEntregasExecute(Sender: TObject);
 begin
@@ -64,6 +65,15 @@ begin
     view_AcompanhamntoEntregas := Tview_AcompanhamntoEntregas.Create(Application);
   end;
   view_AcompanhamntoEntregas.Show;
+end;
+
+procedure Tview_Main.actionExtratoExecute(Sender: TObject);
+begin
+if not Assigned(view_Extrato) then
+  begin
+    view_Extrato := Tview_Extrato.Create(Application);
+  end;
+  view_Extrato.Show;
 end;
 
 procedure Tview_Main.actionFecharExecute(Sender: TObject);
@@ -112,7 +122,7 @@ begin
   begin
     Common.Params.paramTipoUsuario := 'E';
     NomeEntregador(Common.Params.paramCodigoEntregador);
-    statusBarMain.Panels[0].Text := 'Entregador: ' + Common.Params.paramCodigoEntregador.ToString + ' - ' +
+    statusBarMain.Panels[0].Text := 'Entregador(a): ' + Common.Params.paramCodigoEntregador.ToString + ' - ' +
                                     Common.Params.paramNameUser;
   end
   else

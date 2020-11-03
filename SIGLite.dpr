@@ -7,7 +7,6 @@ uses
   Vcl.Styles,
   dm.SIGLite in 'data\dm.SIGLite.pas' {dm_SIGLite: TDataModule},
   Common.ENum in '..\SisGeF5\Common\Common.ENum.pas',
-  Common.Utils in '..\SisGeF5\Common\Common.Utils.pas',
   Global.Parametros in '..\SisGeF5\Common\Global.Parametros.pas',
   View.Login in 'view\View.Login.pas' {view_login},
   Model.RESTLogin in 'model\Model.RESTLogin.pas',
@@ -23,7 +22,11 @@ uses
   Model.RESTPeriodos in 'model\Model.RESTPeriodos.pas',
   Controller.RESTPeriodos in 'controller\Controller.RESTPeriodos.pas',
   Model.RESTEentregas in 'model\Model.RESTEentregas.pas',
-  Controller.RESTEntregas in 'controller\Controller.RESTEntregas.pas';
+  Controller.RESTEntregas in 'controller\Controller.RESTEntregas.pas',
+  Common.Utils in '..\SisGeF5\Common\Common.Utils.pas',
+  View.Extrato in 'view\View.Extrato.pas' {view_Extrato},
+  Model.RESTPreviaExtrato in 'model\Model.RESTPreviaExtrato.pas',
+  Controller.RESTPreviaExtrato in 'controller\Controller.RESTPreviaExtrato.pas';
 
 {$R *.res}
 
