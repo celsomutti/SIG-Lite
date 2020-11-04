@@ -1,9 +1,10 @@
 object view_Extrato: Tview_Extrato
   Left = 0
   Top = 0
+  BorderIcons = [biSystemMenu]
   Caption = 'Extrato'
-  ClientHeight = 489
-  ClientWidth = 959
+  ClientHeight = 549
+  ClientWidth = 950
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
   Font.Color = clWindowText
@@ -22,12 +23,12 @@ object view_Extrato: Tview_Extrato
   object layoutControlPadrao: TdxLayoutControl
     Left = 0
     Top = 0
-    Width = 959
-    Height = 489
+    Width = 950
+    Height = 549
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 800
-    ExplicitHeight = 461
+    ExplicitWidth = 959
+    ExplicitHeight = 489
     object comboBoxTipo: TcxComboBox
       Left = 28
       Top = 59
@@ -104,13 +105,13 @@ object view_Extrato: Tview_Extrato
       Style.ButtonStyle = bts3D
       Style.PopupBorderStyle = epbsFrame3D
       TabOrder = 3
-      Width = 121
+      Width = 151
     end
     object cxGrid: TcxGrid
       Left = 13
       Top = 130
-      Width = 933
-      Height = 135
+      Width = 924
+      Height = 213
       TabOrder = 6
       object cxGridDBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
@@ -126,6 +127,26 @@ object view_Extrato: Tview_Extrato
             Format = ',0;-,0'
             Kind = skSum
             Column = cxGridDBTableView1qtd_entrega
+          end
+          item
+            Format = ',0.00;-,0.00'
+            Kind = skSum
+            Column = cxGridDBTableView1val_creditos
+          end
+          item
+            Format = ',0.00;-,0.00'
+            Kind = skSum
+            Column = cxGridDBTableView1val_debitos
+          end
+          item
+            Format = ',0.00;-,0.00'
+            Kind = skSum
+            Column = cxGridDBTableView1val_extravios
+          end
+          item
+            Format = ',0.00;-,0.00'
+            Kind = skSum
+            Column = cxGridDBTableView1val_total
           end>
         DataController.Summary.SummaryGroups = <>
         OptionsView.ColumnAutoWidth = True
@@ -133,23 +154,43 @@ object view_Extrato: Tview_Extrato
         OptionsView.GroupByBox = False
         object cxGridDBTableView1cod_entregador: TcxGridDBColumn
           DataBinding.FieldName = 'cod_entregador'
-          Width = 87
+          Width = 59
         end
         object cxGridDBTableView1nom_entregador: TcxGridDBColumn
           DataBinding.FieldName = 'nom_entregador'
-          Width = 237
+          Width = 194
         end
         object cxGridDBTableView1val_verba: TcxGridDBColumn
           DataBinding.FieldName = 'val_verba'
-          Width = 204
+          Width = 64
         end
         object cxGridDBTableView1qtd_entrega: TcxGridDBColumn
           DataBinding.FieldName = 'qtd_entrega'
-          Width = 201
+          Width = 64
         end
         object cxGridDBTableView1val_producao: TcxGridDBColumn
           DataBinding.FieldName = 'val_producao'
-          Width = 202
+          Width = 102
+        end
+        object cxGridDBTableView1val_creditos: TcxGridDBColumn
+          DataBinding.FieldName = 'val_creditos'
+          Visible = False
+          Width = 89
+        end
+        object cxGridDBTableView1val_debitos: TcxGridDBColumn
+          DataBinding.FieldName = 'val_debitos'
+          Visible = False
+          Width = 85
+        end
+        object cxGridDBTableView1val_extravios: TcxGridDBColumn
+          DataBinding.FieldName = 'val_extravios'
+          Visible = False
+          Width = 77
+        end
+        object cxGridDBTableView1val_total: TcxGridDBColumn
+          DataBinding.FieldName = 'val_total'
+          Visible = False
+          Width = 121
         end
       end
       object cxGridLevel1: TcxGridLevel
@@ -157,7 +198,7 @@ object view_Extrato: Tview_Extrato
       end
     end
     object buttonPesquisar: TcxButton
-      Left = 491
+      Left = 521
       Top = 59
       Width = 94
       Height = 25
@@ -167,24 +208,24 @@ object view_Extrato: Tview_Extrato
     end
     object buttonExportar: TcxButton
       Left = 13
-      Top = 451
+      Top = 511
       Width = 94
       Height = 25
       Cursor = crHandPoint
       Action = actionExportar
-      TabOrder = 7
+      TabOrder = 9
     end
     object buttonFechar: TcxButton
-      Left = 852
-      Top = 451
+      Left = 843
+      Top = 511
       Width = 94
       Height = 25
       Cursor = crHandPoint
       Action = actionFechar
-      TabOrder = 8
+      TabOrder = 10
     end
     object labelPeriodo: TcxLabel
-      Left = 923
+      Left = 914
       Top = 63
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
@@ -195,6 +236,46 @@ object view_Extrato: Tview_Extrato
       Style.HotTrack = False
       Style.IsFontAssigned = True
       Transparent = True
+    end
+    object cxGridExtravios: TcxGrid
+      Left = 13
+      Top = 374
+      Width = 458
+      Height = 129
+      TabOrder = 7
+      object cxGridExtraviosDBTableView1: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsExtravios
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsView.CellAutoHeight = True
+        OptionsView.ColumnAutoWidth = True
+        OptionsView.GroupByBox = False
+      end
+      object cxGridExtraviosLevel1: TcxGridLevel
+        GridView = cxGridExtraviosDBTableView1
+      end
+    end
+    object cxGridLancamentos: TcxGrid
+      Left = 479
+      Top = 374
+      Width = 458
+      Height = 129
+      TabOrder = 8
+      object cxGridLancamentosDBTableView1: TcxGridDBTableView
+        Navigator.Buttons.CustomButtons = <>
+        DataController.DataSource = dsLancamentos
+        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.FooterSummaryItems = <>
+        DataController.Summary.SummaryGroups = <>
+        OptionsView.CellAutoHeight = True
+        OptionsView.ColumnAutoWidth = True
+        OptionsView.GroupByBox = False
+      end
+      object cxGridLancamentosLevel1: TcxGridLevel
+        GridView = cxGridLancamentosDBTableView1
+      end
     end
     object layoutControlPadraoGroup_Root: TdxLayoutGroup
       AlignHorz = ahClient
@@ -250,18 +331,18 @@ object view_Extrato: Tview_Extrato
       CaptionOptions.Layout = clTop
       Control = comboBoxPeriodos
       ControlOptions.OriginalHeight = 25
-      ControlOptions.OriginalWidth = 121
+      ControlOptions.OriginalWidth = 151
       ControlOptions.ShowBorder = False
       Index = 3
     end
     object layoutItemGrid: TdxLayoutItem
       Parent = layoutControlPadraoGroup_Root
       AlignHorz = ahClient
-      AlignVert = avTop
+      AlignVert = avClient
       CaptionOptions.Text = 'Extrato'
       CaptionOptions.Layout = clTop
       Control = cxGrid
-      ControlOptions.OriginalHeight = 135
+      ControlOptions.OriginalHeight = 143
       ControlOptions.OriginalWidth = 250
       ControlOptions.ShowBorder = False
       Index = 1
@@ -307,7 +388,7 @@ object view_Extrato: Tview_Extrato
       Parent = layoutControlPadraoGroup_Root
       AlignVert = avBottom
       LayoutDirection = ldHorizontal
-      Index = 2
+      Index = 3
       AutoCreated = True
     end
     object layoutItemLabelPeriodo: TdxLayoutItem
@@ -322,6 +403,39 @@ object view_Extrato: Tview_Extrato
       ControlOptions.OriginalWidth = 8
       ControlOptions.ShowBorder = False
       Index = 5
+    end
+    object layoutItemGridExtravios: TdxLayoutItem
+      Parent = dxLayoutAutoCreatedGroup2
+      AlignHorz = ahClient
+      AlignVert = avClient
+      CaptionOptions.Text = 'Extravios'
+      CaptionOptions.Layout = clTop
+      Visible = False
+      Control = cxGridExtravios
+      ControlOptions.OriginalHeight = 129
+      ControlOptions.OriginalWidth = 250
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object layoutItemGridLancamentos: TdxLayoutItem
+      Parent = dxLayoutAutoCreatedGroup2
+      AlignHorz = ahClient
+      AlignVert = avClient
+      CaptionOptions.Text = 'Lan'#231'amentos'
+      CaptionOptions.Layout = clTop
+      Visible = False
+      Control = cxGridLancamentos
+      ControlOptions.OriginalHeight = 129
+      ControlOptions.OriginalWidth = 250
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutAutoCreatedGroup2: TdxLayoutAutoCreatedGroup
+      Parent = layoutControlPadraoGroup_Root
+      AlignVert = avTop
+      LayoutDirection = ldHorizontal
+      Index = 2
+      AutoCreated = True
     end
   end
   object SaveDialog: TSaveDialog
@@ -362,8 +476,7 @@ object view_Extrato: Tview_Extrato
     UpdateOptions.AssignedValues = [uvCheckRequired, uvAutoCommitUpdates]
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
-    Left = 696
-    Top = 8
+    Left = 664
     object fdMemTablePreviacod_entregador: TIntegerField
       DisplayLabel = 'C'#243'digo'
       FieldName = 'cod_entregador'
@@ -388,5 +501,35 @@ object view_Extrato: Tview_Extrato
       FieldName = 'val_producao'
       DisplayFormat = ',0.00;-,0.00'
     end
+    object fdMemTablePreviaval_creditos: TFloatField
+      DisplayLabel = 'Cr'#233'ditos'
+      FieldName = 'val_creditos'
+      DisplayFormat = ',0.00;-,0.00'
+    end
+    object fdMemTablePreviaval_debitos: TFloatField
+      DisplayLabel = 'D'#233'bitos'
+      FieldName = 'val_debitos'
+      DisplayFormat = ',0.00;-,0.00'
+    end
+    object fdMemTablePreviaval_extravios: TFloatField
+      DisplayLabel = 'Extravios'
+      FieldName = 'val_extravios'
+      DisplayFormat = ',0.00;-,0.00'
+    end
+    object fdMemTablePreviaval_total: TFloatField
+      DisplayLabel = 'Total'
+      FieldName = 'val_total'
+      DisplayFormat = ',0.00;-,0.00'
+    end
+  end
+  object dsExtravios: TDataSource
+    AutoEdit = False
+    DataSet = dm_SIGLite.memTableExtravios
+    Left = 720
+  end
+  object dsLancamentos: TDataSource
+    AutoEdit = False
+    DataSet = dm_SIGLite.memTableLancamentos
+    Left = 768
   end
 end

@@ -11,7 +11,7 @@ type
   public
     constructor Create;
     destructor Destroy; override;
-    function SearchExtrato(sEntregador, sAno, sMes, sQuinzena: String): Boolean;
+    function SearchExtrato(sTipo, sCodigo, sAno, sMes, sQuinzena: String): Boolean;
   end;
 
 implementation
@@ -29,9 +29,9 @@ begin
   inherited;
 end;
 
-function TRESTExtratosController.SearchExtrato(sEntregador, sAno, sMes, sQuinzena: String): Boolean;
+function TRESTExtratosController.SearchExtrato(sTipo, sCodigo, sAno, sMes, sQuinzena: String): Boolean;
 begin
-  Result := FExtratos.SearchExtrato(sEntregador, sAno, sMes, sQuinzena);
+  Result := FExtratos.SearchExtrato(sTipo, sCodigo, sAno, sMes, sQuinzena);
 end;
 
 end.

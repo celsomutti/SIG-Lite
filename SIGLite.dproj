@@ -143,6 +143,12 @@
         </DCCReference>
         <DCCReference Include="model\Model.RESTPreviaExtrato.pas"/>
         <DCCReference Include="controller\Controller.RESTPreviaExtrato.pas"/>
+        <DCCReference Include="model\Model.RESTExtrato.pas"/>
+        <DCCReference Include="controller\Controller.RESTExtratos.pas"/>
+        <DCCReference Include="model\Model.RESTExtravios.pas"/>
+        <DCCReference Include="controller\Controller.RESTExtravios.pas"/>
+        <DCCReference Include="model\Model.RESTLancamentos.pas"/>
+        <DCCReference Include="controller\Controller.RESTLancamentos.pas"/>
         <BuildConfiguration Include="Release">
             <Key>Cfg_2</Key>
             <CfgParent>Base</CfgParent>

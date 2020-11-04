@@ -273,7 +273,8 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
   end
   object actionListEntregas: TActionList
     Images = dm_SIGLite.imageList16_16
-    Left = 784
+    Left = 672
+    Top = 16
     object actionPesquisar: TAction
       Caption = 'Pesquisar'
       Hint = 'Pesquisar Periodo'

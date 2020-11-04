@@ -117,6 +117,14 @@ begin
   SetupAno;
   PopulaPeriodos;
   cxGridDBTableView1.ClearItems;
+  if Common.Params.paramTipoUsuario = 'B' then
+  begin
+    layoutItemButtonExportar.Visible := True;
+  end
+  else
+  begin
+    layoutItemButtonExportar.Visible := False;
+  end;
 end;
 
 procedure Tview_AcompanhamntoEntregas.PesquisaEntregas;

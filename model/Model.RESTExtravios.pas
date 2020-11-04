@@ -10,59 +10,52 @@ type
     procedure StartRestClient(sFile: String);
     procedure StartRestRequest(sFile: String);
   public
-    function SearchExtraviosEntregador(sentregador: String): Boolean;
     function SearchExtraviosExtrato(sextrato: String): Boolean;
   end;
 const
-  API = '/api/dc';
+  API = '/api/SIGLite';
 
 implementation
 
-uses Common.Notificacao, Common.Params, DM.Main;
+uses Common.Params, dm.SIGLite;
 
 { TRESTExtravios }
 
 function TRESTExtravios.SearchExtraviosExtrato(sextrato: String): Boolean;
+var
+  sResult : String;
 begin
   Result  := False;
-  StartRestRequest('/dc_extravios_extrato.php');
-  DM_Main.RESTResponseDataSetAdapter.Dataset := DM_Main.memTableExtrato;
-  DM_Main.RESTRequest.AddParameter('extratos', sextrato, pkGETorPOST);
-  DM_Main.RESTResponseDataSetAdapter.Dataset := DM_Main.memTableExtravios;
-  DM_Main.RESTResponseDataSetAdapter.Active := True;
-  DM_Main.RESTRequest.Execute;
-  if DM_Main.memTableExtravios.IsEmpty then Exit;
+  StartRestRequest('/sl_extravios.php');
+  dm_SIGLite.RESTResponseDataSetAdapter.Dataset := dm_SIGLite.memTableExtravios;
+  dm_SIGLite.RESTRequest.AddParameter('extratos', sextrato, pkGETorPOST);
+  dm_SIGLite.RESTResponseDataSetAdapter.Dataset := dm_SIGLite.memTableExtravios;
+  dm_SIGLite.RESTResponseDataSetAdapter.Active := True;
+  dm_SIGLite.RESTRequest.Execute;
+  if dm_SIGLite.memTableExtravios.IsEmpty then Exit;
+  sResult := dm_SIGLite.memTableExtravios.Fields[0].Value;
+  if sResult = 'False' then
+  begin
+    Exit;
+  end;
   Result := True;
 end;
 
 procedure TRESTExtravios.StartRestClient(sFile: String);
 begin
-  DM_Main.RESTClient.Accept := 'application/json, text/plain; q=0.9, text/html;q=0.8,';
-  DM_Main.RESTClient.AcceptCharset := 'utf-8, *;q=0.8';
-  DM_Main.RESTClient.BaseURL := Common.Params.paramBaseURL + API + sFile;
-  DM_Main.RESTClient.RaiseExceptionOn500 := False;
+  dm_SIGLite.RESTClient.Accept := 'application/json, text/plain; q=0.9, text/html;q=0.8,';
+  dm_SIGLite.RESTClient.AcceptCharset := 'utf-8, *;q=0.8';
+  dm_SIGLite.RESTClient.BaseURL := Common.Params.paramBaseURL + API + sFile;
+  dm_SIGLite.RESTClient.RaiseExceptionOn500 := False;
 end;
 
 procedure TRESTExtravios.StartRestRequest(sFile: String);
 begin
   StartRestClient(sfile);
-  DM_Main.RESTRequest.Client := DM_Main.RESTClient;
-  DM_Main.RESTRequest.Accept := DM_Main.RESTClient.Accept;
-  DM_Main.RESTRequest.AcceptCharset := DM_Main.RESTClient.AcceptCharset;
-  DM_Main.RESTRequest.Method := rmPOST;
-end;
-
-function TRESTExtravios.SearchExtraviosEntregador(sentregador: String): Boolean;
-begin
-  Result  := False;
-  StartRestRequest('/dc_extravios_entregador.php');
-  DM_Main.RESTResponseDataSetAdapter.Dataset := DM_Main.memTableExtrato;
-  DM_Main.RESTRequest.AddParameter('entregador', sentregador, pkGETorPOST);
-  DM_Main.RESTResponseDataSetAdapter.Dataset := DM_Main.memTableExtravios;
-  DM_Main.RESTResponseDataSetAdapter.Active := True;
-  DM_Main.RESTRequest.Execute;
-  if DM_Main.memTableExtravios.IsEmpty then Exit;
-  Result := True;
+  dm_SIGLite.RESTRequest.Client := dm_SIGLite.RESTClient;
+  dm_SIGLite.RESTRequest.Accept := dm_SIGLite.RESTClient.Accept;
+  dm_SIGLite.RESTRequest.AcceptCharset := dm_SIGLite.RESTClient.AcceptCharset;
+  dm_SIGLite.RESTRequest.Method := rmPOST;
 end;
 
 end.

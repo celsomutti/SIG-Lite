@@ -26,7 +26,13 @@ uses
   Common.Utils in '..\SisGeF5\Common\Common.Utils.pas',
   View.Extrato in 'view\View.Extrato.pas' {view_Extrato},
   Model.RESTPreviaExtrato in 'model\Model.RESTPreviaExtrato.pas',
-  Controller.RESTPreviaExtrato in 'controller\Controller.RESTPreviaExtrato.pas';
+  Controller.RESTPreviaExtrato in 'controller\Controller.RESTPreviaExtrato.pas',
+  Model.RESTExtrato in 'model\Model.RESTExtrato.pas',
+  Controller.RESTExtratos in 'controller\Controller.RESTExtratos.pas',
+  Model.RESTExtravios in 'model\Model.RESTExtravios.pas',
+  Controller.RESTExtravios in 'controller\Controller.RESTExtravios.pas',
+  Model.RESTLancamentos in 'model\Model.RESTLancamentos.pas',
+  Controller.RESTLancamentos in 'controller\Controller.RESTLancamentos.pas';
 
 {$R *.res}
 

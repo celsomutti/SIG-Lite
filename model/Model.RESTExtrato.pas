@@ -10,47 +10,56 @@ type
     procedure StartRestClient(sFile: String);
     procedure StartRestRequest;
   public
-    function SearchExtrato(sEntregador, sAno, sMes, sQuinzena: String): Boolean;
+    function SearchExtrato(sTipo, sCodigo, sAno, sMes, sQuinzena: String): Boolean;
   end;
 const
-  API = '/api/dc';
+
+ API = '/api/SIGLite';
 
 implementation
 
-uses Common.Notificacao, Common.Params, DM.Main;
+uses Common.Params, dm.SIGLite;
 
 { TRESTExtrato }
 
 procedure TRESTExtrato.StartRestClient(sFile: String);
 begin
-  DM_Main.RESTClient.Accept := 'application/json, text/plain; q=0.9, text/html;q=0.8,';
-  DM_Main.RESTClient.AcceptCharset := 'utf-8, *;q=0.8';
-  DM_Main.RESTClient.BaseURL := Common.Params.paramBaseURL + API + sFile;
-  DM_Main.RESTClient.RaiseExceptionOn500 := False;
+  dm_SIGLite.RESTClient.Accept := 'application/json, text/plain; q=0.9, text/html;q=0.8,';
+  dm_SIGLite.RESTClient.AcceptCharset := 'utf-8, *;q=0.8';
+  dm_SIGLite.RESTClient.BaseURL := Common.Params.paramBaseURL + API + sFile;
+  dm_SIGLite.RESTClient.RaiseExceptionOn500 := False;
 end;
 
 procedure TRESTExtrato.StartRestRequest;
 begin
-  StartRestClient('/dc_extrato.php');
-  DM_Main.RESTRequest.Client := DM_Main.RESTClient;
-  DM_Main.RESTRequest.Accept := DM_Main.RESTClient.Accept;
-  DM_Main.RESTRequest.AcceptCharset := DM_Main.RESTClient.AcceptCharset;
-  DM_Main.RESTRequest.Method := rmPOST;
+  StartRestClient('/sl_extrato.php');
+  dm_SIGLite.RESTRequest.Client := dm_SIGLite.RESTClient;
+  dm_SIGLite.RESTRequest.Accept := dm_SIGLite.RESTClient.Accept;
+  dm_SIGLite.RESTRequest.AcceptCharset := dm_SIGLite.RESTClient.AcceptCharset;
+  dm_SIGLite.RESTRequest.Method := rmPOST;
 end;
 
-function TRESTExtrato.SearchExtrato(sEntregador, sAno, sMes, sQuinzena: String): Boolean;
+function TRESTExtrato.SearchExtrato(sTipo, sCodigo, sAno, sMes, sQuinzena: String): Boolean;
+var
+  sResult : String;
 begin
   Result  := False;
   StartRestRequest;
-  DM_Main.RESTResponseDataSetAdapter.Dataset := DM_Main.memTableExtrato;
-  DM_Main.RESTRequest.AddParameter('entregador', sEntregador, pkGETorPOST);
-  DM_Main.RESTRequest.AddParameter('ano', sAno, pkGETorPOST);
-  DM_Main.RESTRequest.AddParameter('mes', sMes, pkGETorPOST);
-  DM_Main.RESTRequest.AddParameter('quinzena', sQuinzena, pkGETorPOST);
-  DM_Main.RESTResponseDataSetAdapter.Dataset := DM_Main.memTableExtrato;
-  DM_Main.RESTResponseDataSetAdapter.Active := True;
-  DM_Main.RESTRequest.Execute;
-  if DM_Main.memTableExtrato.IsEmpty then Exit;
+  dm_SIGLite.RESTResponseDataSetAdapter.Dataset := dm_SIGLite.memTableExtrato;
+  dm_SIGLite.RESTRequest.AddParameter('tipo', sTipo, pkGETorPOST);
+  dm_SIGLite.RESTRequest.AddParameter('codigo', sCodigo, pkGETorPOST);
+  dm_SIGLite.RESTRequest.AddParameter('ano', sAno, pkGETorPOST);
+  dm_SIGLite.RESTRequest.AddParameter('mes', sMes, pkGETorPOST);
+  dm_SIGLite.RESTRequest.AddParameter('quinzena', sQuinzena, pkGETorPOST);
+  dm_SIGLite.RESTResponseDataSetAdapter.Dataset := dm_SIGLite.memTableExtrato;
+  dm_SIGLite.RESTResponseDataSetAdapter.Active := True;
+  dm_SIGLite.RESTRequest.Execute;
+  if dm_SIGLite.memTableExtrato.IsEmpty then Exit;
+  sResult := dm_SIGLite.memTableExtrato.Fields[0].Value;
+  if sResult = 'False' then
+  begin
+    Exit;
+  end;
   Result := True;
 end;
 
