@@ -1,13 +1,12 @@
-unit Model.Usuarios;
+unit Model.RESTUsuarios;
 
 interface
 
 uses
-  System.SysUtils, System.Classes, FireDAC.Stan.Intf, REST.Types, FireDAC.Stan.Option, FireDAC.Stan.Param, FireDAC.Stan.Error,
-  FireDAC.DatS, FireDAC.Phys.Intf, FireDAC.DApt.Intf, Data.DB, FireDAC.Comp.DataSet, FireDAC.Comp.Client, Web.HTTPApp, System.JSON;
+  Web.HTTPApp, System.JSON, REST.Types, System.SysUtils, System.Classes;
 
   type
-    TUsuarios = class
+    TRESTUsuarios = class
     private
       FEMail: String;
       FAtivo: String;
@@ -50,11 +49,11 @@ const
 
 implementation
 
-{ TUsuarios }
+{ TRESTUsuarios }
 
 uses Common.Params, dm.SIGLite;
 
-procedure TUsuarios.PopuleUsersModel(orow: TJSONObject);
+procedure TRESTUsuarios.PopuleUsersModel(orow: TJSONObject);
 begin
   FCodigo := orow.GetValue('COD_USUARIO').Value.ToInteger;
   FNome := orow.GetValue('NOM_USUARIO').Value;
@@ -73,24 +72,24 @@ begin
   FManutencao := StrToDateTime(orow.GetValue('DAT_MANUTENCAO').Value);
 end;
 
-procedure TUsuarios.StartRestClient(sFile: String);
+procedure TRESTUsuarios.StartRestClient(sFile: String);
 begin
-  DM_Main.RESTClient.Accept := 'application/json, text/plain; q=0.9, text/html;q=0.8,';
-  DM_Main.RESTClient.AcceptCharset := 'utf-8, *;q=0.8';
-  DM_Main.RESTClient.BaseURL := Common.Params.paramBaseURL + API + sFile;
-  DM_Main.RESTClient.RaiseExceptionOn500 := False;
+  dm_SIGLite.RESTClient.Accept := 'application/json, text/plain; q=0.9, text/html;q=0.8,';
+  dm_SIGLite.RESTClient.AcceptCharset := 'utf-8, *;q=0.8';
+  dm_SIGLite.RESTClient.BaseURL := Common.Params.paramBaseURL + API + sFile;
+  dm_SIGLite.RESTClient.RaiseExceptionOn500 := False;
 end;
 
-procedure TUsuarios.StartRestRequest;
+procedure TRESTUsuarios.StartRestRequest;
 begin
-  StartRestClient('/dc_login.php');
-  DM_Main.RESTRequest.Client := DM_Main.RESTClient;
-  DM_Main.RESTRequest.Accept := DM_Main.RESTClient.Accept;
-  DM_Main.RESTRequest.AcceptCharset := DM_Main.RESTClient.AcceptCharset;
-  DM_Main.RESTRequest.Method := rmPOST;
+  StartRestClient('/sl_cadastra_usuario.php');
+  dm_SIGLite.RESTRequest.Client := dm_SIGLite.RESTClient;
+  dm_SIGLite.RESTRequest.Accept := dm_SIGLite.RESTClient.Accept;
+  dm_SIGLite.RESTRequest.AcceptCharset := dm_SIGLite.RESTClient.AcceptCharset;
+  dm_SIGLite.RESTRequest.Method := rmPOST;
 end;
 
-function TUsuarios.ValidaLogin(sUsername, sPassword: String): Boolean;
+function TRESTUsuarios.ValidaLogin(sUsername, sPassword: String): Boolean;
 var
   oretorno: TJSONArray;
   sretorno: string;
@@ -98,15 +97,15 @@ var
 begin
   Result  := False;
   StartRestRequest;
-  DM_Main.RESTRequest.AddParameter('username', sUserName, pkGETorPOST);
-  DM_Main.RESTRequest.AddParameter('password', sPassword, pkGETorPOST);
-  DM_Main.RESTRequest.Execute;
-  sretorno := DM_Main.RESTRequest.Response.JSONText;
+  dm_SIGLite.RESTRequest.AddParameter('username', sUserName, pkGETorPOST);
+  dm_SIGLite.RESTRequest.AddParameter('password', sPassword, pkGETorPOST);
+  dm_SIGLite.RESTRequest.Execute;
+  sretorno := dm_SIGLite.RESTRequest.Response.JSONText;
   if sretorno = 'false' then
   begin
     Exit;
   end;
-  oretorno := DM_Main.RESTRequest.Response.JSONValue as TJSONArray;
+  oretorno := dm_SIGLite.RESTRequest.Response.JSONValue as TJSONArray;
   orow := oretorno.Items[0] as TJSONObject;
   PopuleUsersModel(orow);
   Result := True;

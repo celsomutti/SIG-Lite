@@ -27,8 +27,6 @@ object view_Extrato: Tview_Extrato
     Height = 549
     Align = alClient
     TabOrder = 0
-    ExplicitWidth = 959
-    ExplicitHeight = 489
     object comboBoxTipo: TcxComboBox
       Left = 28
       Top = 59

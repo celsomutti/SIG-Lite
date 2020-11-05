@@ -11,6 +11,7 @@ type
     procedure StartRestRequest(sFile: String);
   public
     function RetornaAgente(iUsuario: integer): boolean;
+    function GravaUsuarioEntregador(sID, sCodigo: String): boolean;
   end;
 const
   API = '/api/SIGLite';
@@ -36,6 +37,21 @@ begin
   dm_SIGLite.RESTRequest.Accept := dm_SIGLite.RESTClient.Accept;
   dm_SIGLite.RESTRequest.AcceptCharset := dm_SIGLite.RESTClient.AcceptCharset;
   dm_SIGLite.RESTRequest.Method := rmPOST;
+end;
+
+function TRESTLoginAgente.GravaUsuarioEntregador(sID, sCodigo: String): boolean;
+begin
+  Result := False;
+  StartRestRequest('/sl_cadastra_usuario_entregador.php');
+  dm_SIGLite.RESTRequest.AddParameter('id', sID, pkGETorPOST);
+  dm_SIGLite.RESTRequest.AddParameter('codigo', sCodigo, pkGETorPOST);
+  dm_SIGLite.RESTResponseDataSetAdapter.Active := False;
+  dm_SIGLite.RESTRequest.Execute;
+  if dm_SIGLite.RESTResponse.JSONText = 'false' then
+  begin
+    Exit;
+  end;
+  Result := True;
 end;
 
 function TRESTLoginAgente.RetornaAgente(iUsuario: integer): Boolean;

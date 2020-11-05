@@ -32,7 +32,9 @@ uses
   Model.RESTExtravios in 'model\Model.RESTExtravios.pas',
   Controller.RESTExtravios in 'controller\Controller.RESTExtravios.pas',
   Model.RESTLancamentos in 'model\Model.RESTLancamentos.pas',
-  Controller.RESTLancamentos in 'controller\Controller.RESTLancamentos.pas';
+  Controller.RESTLancamentos in 'controller\Controller.RESTLancamentos.pas',
+  Model.RESTCadastro in 'model\Model.RESTCadastro.pas',
+  Controller.RESTCadastro in 'controller\Controller.RESTCadastro.pas';
 
 {$R *.res}
 

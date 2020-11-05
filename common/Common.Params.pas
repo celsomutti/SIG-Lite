@@ -14,6 +14,7 @@ var
   paramCodigoEntregador: System.Integer;
   paramNomeBase : System.string;
   paramTipoUsuario: System.string;
+  paramUsuarioAtivo: System.string;
 implementation
 
 end.

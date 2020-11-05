@@ -2,8 +2,8 @@ object view_login: Tview_login
   Left = 0
   Top = 0
   BorderStyle = bsSizeToolWin
-  Caption = 'Login'
-  ClientHeight = 349
+  Caption = 'Acesso ao Sistema'
+  ClientHeight = 382
   ClientWidth = 477
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -573,12 +573,12 @@ object view_login: Tview_login
     Left = 0
     Top = 0
     Width = 477
-    Height = 349
+    Height = 382
     Align = alClient
     TabOrder = 0
     object labelTitle: TcxLabel
-      Left = 104
-      Top = 63
+      Left = 71
+      Top = 30
       Caption = 'labelTitle'
       ParentFont = False
       Style.Font.Charset = ANSI_CHARSET
@@ -591,19 +591,19 @@ object view_login: Tview_login
       Transparent = True
     end
     object textEditUsuario: TcxTextEdit
-      Left = 63
-      Top = 130
+      Left = 30
+      Top = 97
       Hint = 'Informe o login'
       Properties.MaxLength = 30
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
       TabOrder = 1
-      Width = 351
+      Width = 417
     end
     object buttonEditSenha: TcxButtonEdit
-      Left = 63
-      Top = 186
+      Left = 30
+      Top = 153
       Hint = 'Informe a senha'
       Properties.Buttons = <
         item
@@ -614,55 +614,194 @@ object view_login: Tview_login
       Properties.EchoMode = eemPassword
       Properties.Images = dm_SIGLite.imageList16_16
       Properties.MaxLength = 160
+      Properties.OnButtonClick = buttonEditSenhaPropertiesButtonClick
       Style.BorderColor = clWindowFrame
       Style.BorderStyle = ebs3D
       Style.HotTrack = False
       Style.ButtonStyle = bts3D
       TabOrder = 2
-      Width = 351
+      Width = 417
     end
     object buttonEntrar: TcxButton
-      Left = 63
-      Top = 261
+      Left = 30
+      Top = 327
       Width = 90
       Height = 25
       Cursor = crHandPoint
       Action = actionEntrar
-      TabOrder = 3
+      TabOrder = 4
     end
     object buttonCancelar: TcxButton
-      Left = 327
-      Top = 261
+      Left = 360
+      Top = 327
       Width = 87
       Height = 25
       Cursor = crHandPoint
       Action = actionCancelar
       Cancel = True
-      TabOrder = 4
+      TabOrder = 5
+    end
+    object buttonEditCPF: TcxButtonEdit
+      Left = 10000
+      Top = 10000
+      Hint = 'Informe o CPF'
+      Properties.Buttons = <
+        item
+          Default = True
+          ImageIndex = 7
+          Kind = bkGlyph
+        end>
+      Properties.IgnoreMaskBlank = True
+      Properties.Images = dm_SIGLite.imageList16_16
+      Properties.MaskKind = emkRegExpr
+      Properties.EditMask = '\d\d\d\d\d\d\d\d\d\d\d'
+      Properties.OnButtonClick = buttonEditCPFPropertiesButtonClick
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.ButtonStyle = bts3D
+      TabOrder = 7
+      Visible = False
+      Width = 417
+    end
+    object textEditNome: TcxTextEdit
+      Left = 10000
+      Top = 10000
+      Hint = 'Informe o nome completo'
+      Properties.MaxLength = 80
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      TabOrder = 8
+      Visible = False
+      Width = 417
+    end
+    object textEditEMail: TcxTextEdit
+      Left = 10000
+      Top = 10000
+      Hint = 'Informe o endere'#231'o de e-mail'
+      Properties.CharCase = ecLowerCase
+      Properties.MaxLength = 150
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      TabOrder = 9
+      Visible = False
+      Width = 417
+    end
+    object buttonEditNovaSenha: TcxButtonEdit
+      Left = 10000
+      Top = 10000
+      Hint = 'Informe uma senha'
+      Properties.Buttons = <
+        item
+          Default = True
+          ImageIndex = 5
+          Kind = bkGlyph
+        end>
+      Properties.EchoMode = eemPassword
+      Properties.Images = dm_SIGLite.imageList16_16
+      Properties.OnButtonClick = buttonEditNovaSenhaPropertiesButtonClick
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.ButtonStyle = bts3D
+      TabOrder = 10
+      Visible = False
+      Width = 205
+    end
+    object buttonEditConfirmaSenha: TcxButtonEdit
+      Left = 10000
+      Top = 10000
+      Hint = 'Confirma a senha'
+      Properties.Buttons = <
+        item
+          Default = True
+          ImageIndex = 5
+          Kind = bkGlyph
+        end>
+      Properties.EchoMode = eemPassword
+      Properties.Images = dm_SIGLite.imageList16_16
+      Properties.OnButtonClick = buttonEditConfirmaSenhaPropertiesButtonClick
+      Style.BorderColor = clWindowFrame
+      Style.BorderStyle = ebs3D
+      Style.HotTrack = False
+      Style.ButtonStyle = bts3D
+      TabOrder = 11
+      Visible = False
+      Width = 204
+    end
+    object buttonGravar: TcxButton
+      Left = 10000
+      Top = 10000
+      Width = 83
+      Height = 25
+      Cursor = crHandPoint
+      Action = actionGravar
+      TabOrder = 12
+      Visible = False
+    end
+    object buttonCancelarUsuario: TcxButton
+      Left = 10000
+      Top = 10000
+      Width = 79
+      Height = 25
+      Cursor = crHandPoint
+      Action = actionCancelarCadastro
+      TabOrder = 13
+      Visible = False
+    end
+    object labelCadastro: TcxLabel
+      Left = 10000
+      Top = 10000
+      Caption = 'Cadastro'
+      ParentFont = False
+      Style.Font.Charset = ANSI_CHARSET
+      Style.Font.Color = clWindowText
+      Style.Font.Height = -16
+      Style.Font.Name = 'Segoe UI Semibold'
+      Style.Font.Style = [fsBold]
+      Style.HotTrack = False
+      Style.IsFontAssigned = True
+      Transparent = True
+      Visible = False
+    end
+    object cxButton1: TcxButton
+      Left = 30
+      Top = 186
+      Width = 417
+      Height = 25
+      Cursor = crHandPoint
+      Action = actionCadastro
+      SpeedButtonOptions.CanBeFocused = False
+      SpeedButtonOptions.Transparent = True
+      TabOrder = 3
+      TabStop = False
+      Font.Charset = ANSI_CHARSET
+      Font.Color = clWindowText
+      Font.Height = -13
+      Font.Name = 'Segoe UI Semibold'
+      Font.Style = [fsBold, fsItalic]
+      ParentFont = False
     end
     object layoutControlPadraoGroup_Root: TdxLayoutGroup
       AlignHorz = ahClient
       AlignVert = avClient
       ButtonOptions.Buttons = <>
       Hidden = True
-      Padding.Bottom = 50
-      Padding.Left = 50
-      Padding.Right = 50
-      Padding.Top = 50
+      LayoutDirection = ldTabbed
       Padding.AssignedValues = [lpavBottom, lpavLeft, lpavRight, lpavTop]
       ShowBorder = False
+      TabbedOptions.HideTabs = True
       Index = -1
     end
     object layoutGroupLogin: TdxLayoutGroup
       Parent = layoutControlPadraoGroup_Root
-      AlignHorz = ahClient
-      AlignVert = avClient
       CaptionOptions.Text = 'Login'
       CaptionOptions.Visible = False
       SizeOptions.AssignedValues = [sovSizableHorz]
       SizeOptions.SizableHorz = False
       ButtonOptions.Buttons = <>
-      ItemIndex = 3
       ShowBorder = False
       Index = 0
     end
@@ -728,7 +867,7 @@ object view_login: Tview_login
     end
     object layoutItemUsuario: TdxLayoutItem
       Parent = layoutGroupLogin
-      CaptionOptions.Text = 'Usu'#225'rio:'
+      CaptionOptions.Text = 'Login ou CPF:'
       CaptionOptions.Layout = clTop
       Control = textEditUsuario
       ControlOptions.OriginalHeight = 25
@@ -774,14 +913,138 @@ object view_login: Tview_login
       Parent = layoutGroupLogin
       AlignVert = avBottom
       LayoutDirection = ldHorizontal
-      Index = 3
+      Index = 4
       AutoCreated = True
+    end
+    object layoutGroupCadastro: TdxLayoutGroup
+      Parent = layoutControlPadraoGroup_Root
+      CaptionOptions.Text = 'Cadastro'
+      ButtonOptions.Buttons = <>
+      Index = 1
+    end
+    object layoutItemCPF: TdxLayoutItem
+      Parent = layoutGroupCadastro
+      AlignVert = avTop
+      CaptionOptions.Text = 'CPF:'
+      CaptionOptions.Layout = clTop
+      Control = buttonEditCPF
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 121
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object layoutItemNome: TdxLayoutItem
+      Parent = layoutGroupCadastro
+      AlignVert = avTop
+      CaptionOptions.Text = 'Nome:'
+      CaptionOptions.Layout = clTop
+      Control = textEditNome
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 121
+      ControlOptions.ShowBorder = False
+      Index = 2
+    end
+    object layoutItemEMail: TdxLayoutItem
+      Parent = layoutGroupCadastro
+      AlignVert = avTop
+      CaptionOptions.Text = 'E-Mail:'
+      CaptionOptions.Layout = clTop
+      Control = textEditEMail
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 121
+      ControlOptions.ShowBorder = False
+      Index = 3
+    end
+    object layoutItemNovaSenha: TdxLayoutItem
+      Parent = dxLayoutAutoCreatedGroup2
+      AlignHorz = ahClient
+      AlignVert = avTop
+      CaptionOptions.Text = 'Senha:'
+      CaptionOptions.Layout = clTop
+      Control = buttonEditNovaSenha
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 155
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object layoutItemConfirmacaoSenha: TdxLayoutItem
+      Parent = dxLayoutAutoCreatedGroup2
+      AlignHorz = ahClient
+      AlignVert = avTop
+      CaptionOptions.Text = 'Confirma'#231#227'o Senha:'
+      CaptionOptions.Layout = clTop
+      Control = buttonEditConfirmaSenha
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 154
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutAutoCreatedGroup2: TdxLayoutAutoCreatedGroup
+      Parent = layoutGroupCadastro
+      LayoutDirection = ldHorizontal
+      Index = 4
+      AutoCreated = True
+    end
+    object layoutItemButtonGravar: TdxLayoutItem
+      Parent = dxLayoutAutoCreatedGroup3
+      AlignHorz = ahLeft
+      AlignVert = avClient
+      CaptionOptions.Text = 'cxButton1'
+      CaptionOptions.Visible = False
+      CaptionOptions.Layout = clTop
+      Control = buttonGravar
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 83
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object layoutItemButtonCancelarUsuario: TdxLayoutItem
+      Parent = dxLayoutAutoCreatedGroup3
+      AlignHorz = ahRight
+      AlignVert = avClient
+      CaptionOptions.Text = 'cxButton1'
+      CaptionOptions.Visible = False
+      CaptionOptions.Layout = clTop
+      Control = buttonCancelarUsuario
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 79
+      ControlOptions.ShowBorder = False
+      Index = 1
+    end
+    object dxLayoutAutoCreatedGroup3: TdxLayoutAutoCreatedGroup
+      Parent = layoutGroupCadastro
+      AlignVert = avBottom
+      LayoutDirection = ldHorizontal
+      Index = 5
+      AutoCreated = True
+    end
+    object layoutItemLabelCadastro: TdxLayoutItem
+      Parent = layoutGroupCadastro
+      AlignHorz = ahClient
+      AlignVert = avTop
+      CaptionOptions.Text = 'Cadastro'
+      CaptionOptions.Visible = False
+      CaptionOptions.Layout = clTop
+      Control = labelCadastro
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 54
+      ControlOptions.ShowBorder = False
+      Index = 0
+    end
+    object layoutItemCadastro: TdxLayoutItem
+      Parent = layoutGroupLogin
+      CaptionOptions.Text = 'cxButton1'
+      CaptionOptions.Visible = False
+      Control = cxButton1
+      ControlOptions.OriginalHeight = 25
+      ControlOptions.OriginalWidth = 75
+      ControlOptions.ShowBorder = False
+      Index = 3
     end
   end
   object actionListLogin: TActionList
     Images = dm_SIGLite.imageList16_16
-    Left = 24
-    Top = 8
+    Left = 264
     object actionVisualizarSenha: TAction
       Caption = 'Visualizar'
       Hint = 'Visualizar a senha'
@@ -799,6 +1062,23 @@ object view_login: Tview_login
       Hint = 'Cancelar'
       ImageIndex = 1
       OnExecute = actionCancelarExecute
+    end
+    object actionGravar: TAction
+      Caption = 'Gravar'
+      Hint = 'Gravar o usu'#225'rio'
+      ImageIndex = 8
+      OnExecute = actionGravarExecute
+    end
+    object actionCancelarCadastro: TAction
+      Caption = 'Cancelar'
+      Hint = 'Cancelar Cadastro'
+      ImageIndex = 1
+      OnExecute = actionCancelarCadastroExecute
+    end
+    object actionCadastro: TAction
+      Caption = 'Cadraste-se'
+      Hint = 'Clique aqui para se cadastrar'
+      OnExecute = actionCadastroExecute
     end
   end
 end

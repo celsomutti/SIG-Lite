@@ -150,6 +150,11 @@ end;
 procedure Tview_Extrato.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   if dm_SIGLite.fdMemTableExtrato.Active then dm_SIGLite.fdMemTableExtrato.Close;
+  if dm_SIGLite.memTableExtrato.Active then dm_SIGLite.memTableExtrato.Close;
+  if dm_SIGLite.memTableExtravios.Active then dm_SIGLite.memTableExtravios.Close;
+  if dm_SIGLite.memTableLancamentos.Active then dm_SIGLite.memTableLancamentos.Active;
+  if fdMemTablePrevia.Active then fdMemTablePrevia.Close;
+  
   Action := caFree;
   view_Extrato := nil;
 end;

@@ -12,11 +12,17 @@ type
     constructor Create;
     destructor Destroy; override;
     function RetornaNomeEntregador(iEntregador: Integer): boolean;
+    function CPFEntregador(sCPF: String): boolean;
   end;
 
 implementation
 
 { TTRESTBasesController }
+
+function TRESTEntregadoresController.CPFEntregador(sCPF: String): boolean;
+begin
+    Result := FEntregadores.CPFEntregador(sCPF);
+end;
 
 constructor TRESTEntregadoresController.Create;
 begin

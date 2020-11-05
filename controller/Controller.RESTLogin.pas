@@ -12,12 +12,24 @@ type
     constructor Create;
     destructor Destroy; override;
     function UsuarioAtivo(sUsername: String): boolean;
+    function CPFExiste(sCPF: String): Boolean;
     function ValidaLogin(sUsername: String; sPassword: String): Boolean;
+    function CodigoUsuario(sCPF: String): Integer;
   end;
 
 implementation
 
 { TRESTLoginController }
+
+function TRESTLoginController.CodigoUsuario(sCPF: String): Integer;
+begin
+  Result := FLogin.CodigoUsuario(sCPF);
+end;
+
+function TRESTLoginController.CPFExiste(sCPF: String): Boolean;
+begin
+  Result := FLogin.CPFExiste(sCPF);
+end;
 
 constructor TRESTLoginController.Create;
 begin

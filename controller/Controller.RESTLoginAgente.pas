@@ -12,6 +12,7 @@ type
     constructor Create;
     destructor Destroy; override;
     function RetornaAgente(iUsuario: integer): Boolean;
+    function GravaUsuarioEntregador(sID, sCodigo: String): boolean;
   end;
 
 implementation
@@ -27,6 +28,11 @@ destructor TRESTLoginAgenteController.Destroy;
 begin
   FLogin.Free;
   inherited;
+end;
+
+function TRESTLoginAgenteController.GravaUsuarioEntregador(sID, sCodigo: String): boolean;
+begin
+  Result := FLogin.GravaUsuarioEntregador(sID, sCodigo);
 end;
 
 function TRESTLoginAgenteController.RetornaAgente(iUsuario: integer): Boolean;

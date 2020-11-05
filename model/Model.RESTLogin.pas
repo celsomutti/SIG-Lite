@@ -11,7 +11,9 @@ type
     procedure StartRestRequest(sFile: String);
   public
     function UsuarioAtivo(sUsername: String): boolean;
+    function CPFExiste(sCPF: String): Boolean;
     function ValidaLogin(sUsername: String; sPassword: String): Boolean;
+    function CodigoUsuario(sCPF: String): Integer;
   end;
 const
   API = '/api/SIGLite';
@@ -21,6 +23,53 @@ implementation
 uses Common.Params, dm.SIGLite, Global.Parametros;
 
 { TRESTLogin }
+
+function TRESTLogin.CodigoUsuario(sCPF: String): Integer;
+var
+  jsonObj, jo: TJSONObject;
+  jvID: TJSONValue;
+  ja: TJSONArray;
+  i: integer;
+  sretorno: string;
+begin
+  Result  := 0;
+  StartRestRequest('/sl_usuarios.php');
+  dm_SIGLite.RESTRequest.AddParameter('cpf', sCPF, pkGETorPOST);
+  dm_SIGLite.RESTRequest.Execute;
+  sretorno := dm_SIGLite.RESTRequest.Response.JSONText;
+  if sretorno = 'false' then
+  begin
+    Exit;
+  end;
+  if dm_SIGLite.RESTResponse.JSONValue is TJSONArray then
+  begin
+    ja := dm_SIGLite.RESTResponse.JSONValue as TJSONArray;
+    jsonObj := (ja.Get(0) as TJSONObject);
+    jvID := jsonObj.Get(0).JsonValue;
+    i := StrToIntDef(jvID.Value,0);
+  end
+  else
+  begin
+    Exit;
+  end;
+  Result := i;
+end;
+
+function TRESTLogin.CPFExiste(sCPF: String): Boolean;
+var
+  sretorno: string;
+begin
+  Result  := False;
+  StartRestRequest('/sl_cpf_existe.php');
+  dm_SIGLite.RESTRequest.AddParameter('cpf', sCPF, pkGETorPOST);
+  dm_SIGLite.RESTRequest.Execute;
+  sretorno := dm_SIGLite.RESTRequest.Response.JSONText;
+  if sretorno = 'false' then
+  begin
+    Exit;
+  end;
+  Result := True;
+end;
 
 procedure TRESTLogin.StartRestClient(sFile: String);
 begin
@@ -91,6 +140,7 @@ begin
     Global.Parametros.pEmailUsuario := jvEMail.Value;
     Common.Params.paramEMailEntregador := jvEMail.Value;
     Global.Parametros.pPassword := jvSenha.Value;
+    Common.Params.paramUsuarioAtivo := jvAtivo.Value;
   end
   else
   begin

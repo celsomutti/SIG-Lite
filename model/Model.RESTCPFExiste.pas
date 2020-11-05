@@ -1,17 +1,17 @@
-unit Model.RESTEntregadores;
+unit Model.RESTCPFExiste;
 
 interface
 
 uses Web.HTTPApp, System.JSON, REST.Types, System.SysUtils, System.Classes;
 
 type
-  TRESTEntregadores = class
+  TRESTCPFExiste = class
   private
     procedure StartRestClient(sFile: String);
     procedure StartRestRequest(sFile: String);
   public
-    function RetornaNomeEntregador(iEntregador: Integer): boolean;
-    function CPFEntregador(sCPF: String): boolean;
+    function UsuarioAtivo(sUsername: String): boolean;
+    function ValidaLogin(sUsername: String; sPassword: String): Boolean;
   end;
 const
   API = '/api/SIGLite';
@@ -20,9 +20,9 @@ implementation
 
 uses Common.Params, dm.SIGLite, Global.Parametros;
 
-{ TRESTLogin }
+{ TRESTCPFExiste }
 
-procedure TRESTEntregadores.StartRestClient(sFile: String);
+procedure TRESTCPFExiste.StartRestClient(sFile: String);
 begin
   dm_SIGLite.RESTClient.Accept := 'application/json, text/plain; q=0.9, text/html;q=0.8,';
   dm_SIGLite.RESTClient.AcceptCharset := 'utf-8, *;q=0.8';
@@ -30,7 +30,7 @@ begin
   dm_SIGLite.RESTClient.RaiseExceptionOn500 := False;
 end;
 
-procedure TRESTEntregadores.StartRestRequest(sFile: String);
+procedure TRESTCPFExiste.StartRestRequest(sFile: String);
 begin
   StartRestClient(sFile);
   dm_SIGLite.RESTRequest.Client := dm_SIGLite.RESTClient;
@@ -39,65 +39,59 @@ begin
   dm_SIGLite.RESTRequest.Method := rmPOST;
 end;
 
-function TRESTEntregadores.CPFEntregador(sCPF: String): boolean;
+function TRESTCPFExiste.UsuarioAtivo(sUsername: String): boolean;
 var
-  jsonObj, jo: TJSONObject;
-  jvAtivo: TJSONValue;
-  ja: TJSONArray;
-  i: integer;
   sretorno: string;
 begin
   Result  := False;
-  StartRestRequest('/sl_cpf_entregador.php');
-  dm_SIGLite.RESTRequest.AddParameter('cpf', sCPF, pkGETorPOST);
+  StartRestRequest('/dc_usuario_ativo.php');
+  dm_SIGLite.RESTRequest.AddParameter('cpf', sUserName, pkGETorPOST);
   dm_SIGLite.RESTRequest.Execute;
   sretorno := dm_SIGLite.RESTRequest.Response.JSONText;
   if sretorno = 'false' then
-  begin
-    Exit;
-  end;
-  if dm_SIGLite.RESTResponse.JSONValue is TJSONArray then
-  begin
-    ja := dm_SIGLite.RESTResponse.JSONValue as TJSONArray;
-    jsonObj := (ja.Get(0) as TJSONObject);
-    jvAtivo := jsonObj.Get(9).JsonValue;
-    sretorno := jvAtivo.Value;
-    if StrToIntDef(sretorno,0) <> 1 then
-    begin
-      Exit;
-    end;
-  end
-  else
   begin
     Exit;
   end;
   Result := True;
 end;
 
-function TRESTEntregadores.RetornaNomeEntregador(iEntregador: Integer): boolean;
+function TRESTCPFExiste.ValidaLogin(sUsername, sPassword: String): Boolean;
 var
   jsonObj, jo: TJSONObject;
-  jvNome: TJSONValue;
+  jvID, jvNome, jvLogin, jvEMail, jvSenha, jvAtivo: TJSONValue;
   ja: TJSONArray;
   i: integer;
   sretorno: string;
 begin
   Result  := False;
-  StartRestRequest('/sl_Entregadores.php');
-  dm_SIGLite.RESTRequest.AddParameter('entregador', iEntregador.ToString, pkGETorPOST);
+  StartRestRequest('/sl_login.php');
+  dm_SIGLite.RESTRequest.AddParameter('username', sUserName, pkGETorPOST);
+  dm_SIGLite.RESTRequest.AddParameter('password', sPassword, pkGETorPOST);
   dm_SIGLite.RESTRequest.Execute;
   sretorno := dm_SIGLite.RESTRequest.Response.JSONText;
   if sretorno = 'false' then
   begin
-    Common.Params.paramNameUser := '';
     Exit;
   end;
   if dm_SIGLite.RESTResponse.JSONValue is TJSONArray then
   begin
     ja := dm_SIGLite.RESTResponse.JSONValue as TJSONArray;
     jsonObj := (ja.Get(0) as TJSONObject);
-    jvNome := jsonObj.Get(2).JsonValue;
+    jvID := jsonObj.Get(0).JsonValue;
+    jvNome := jsonObj.Get(1).JsonValue;
+    jvLogin := jsonObj.Get(2).JsonValue;
+    jvEMail := jsonObj.Get(3).JsonValue;
+    jvSenha := jsonObj.Get(4).JsonValue;
+    jvAtivo := jsonObj.Get(10).JsonValue;
+    Global.Parametros.pUser_ID := StrToIntDef(jvID.Value,0);
+    Global.Parametros.pNameUser := jvNome.Value;
     Common.Params.paramNameUser := jvNome.Value;
+    Global.Parametros.pUser_Name := jvLogin.Value;
+    Common.Params.paramUserName := jvNome.Value;
+    Global.Parametros.pEmailUsuario := jvEMail.Value;
+    Common.Params.paramEMailEntregador := jvEMail.Value;
+    Global.Parametros.pPassword := jvSenha.Value;
+    Common.Params.paramUsuarioAtivo := jvAtivo.Value;
   end
   else
   begin
