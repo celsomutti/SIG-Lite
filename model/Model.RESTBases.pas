@@ -53,7 +53,7 @@ begin
   sretorno := dm_SIGLite.RESTRequest.Response.JSONText;
   if sretorno = 'false' then
   begin
-    Common.Params.paramNameUser := '';
+    Common.Params.paramNomeBase := '';
     Exit;
   end;
   if dm_SIGLite.RESTResponse.JSONValue is TJSONArray then
@@ -61,7 +61,7 @@ begin
     ja := dm_SIGLite.RESTResponse.JSONValue as TJSONArray;
     jsonObj := (ja.Get(0) as TJSONObject);
     jvNome := jsonObj.Get(2).JsonValue;
-    Common.Params.paramNameUser := jvNome.Value;
+    Common.Params.paramNomeBase := jvNome.Value;
   end
   else
   begin

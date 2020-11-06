@@ -13,6 +13,7 @@ type
     function SalvaCadastro(sCpfCnpj, sUserName, sName, sPassword, sEmail: String): boolean;
     function UsuarioExiste(sCPF: String): Boolean;
     function CPFValido(sCPF: string): boolean;
+    function AlteraSenha(sSenha, sID: String): boolean;
   end;
 const
   API = '/api/SIGLite';
@@ -45,6 +46,21 @@ begin
   Result := False;
   StartRestRequest('/sl_cpf_existe.php');
   dm_SIGLite.RESTRequest.AddParameter('cpf', sCpf, pkGETorPOST);
+  dm_SIGLite.RESTResponseDataSetAdapter.Active := False;
+  dm_SIGLite.RESTRequest.Execute;
+  if dm_SIGLite.RESTResponse.JSONText = 'false' then
+  begin
+    Exit;
+  end;
+  Result := True;
+end;
+
+function TRESTCadastro.AlteraSenha(sSenha, sID: String): boolean;
+begin
+  Result := False;
+  StartRestRequest('/sl_altera_senha.php');
+  dm_SIGLite.RESTRequest.AddParameter('id', sID, pkGETorPOST);
+  dm_SIGLite.RESTRequest.AddParameter('senha', sSenha, pkGETorPOST);
   dm_SIGLite.RESTResponseDataSetAdapter.Active := False;
   dm_SIGLite.RESTRequest.Execute;
   if dm_SIGLite.RESTResponse.JSONText = 'false' then

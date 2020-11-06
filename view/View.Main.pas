@@ -39,12 +39,14 @@ type
     procedure FormCloseQuery(Sender: TObject; var CanClose: Boolean);
     procedure actionEntregasExecute(Sender: TObject);
     procedure actionExtratoExecute(Sender: TObject);
+    procedure actionSenhaExecute(Sender: TObject);
   private
     { Private declarations }
     procedure Login;
     procedure Resizeform;
     procedure NomeAgente(iAgente: integer);
     procedure NomeEntregador(ientregador: integer);
+    procedure InitSis;
   public
     { Public declarations }
   end;
@@ -56,7 +58,8 @@ implementation
 
 {$R *.dfm}
 
-uses dm.SIGLite, View.Login, Common.Params, Global.Parametros, View.AcompanhamentoEntregas, View.Extrato;
+uses dm.SIGLite, View.Login, Common.Params, Global.Parametros, View.AcompanhamentoEntregas, View.Extrato, View.AlteraSenha,
+  Common.Utils;
 
 procedure Tview_Main.actionEntregasExecute(Sender: TObject);
 begin
@@ -81,6 +84,19 @@ begin
   Close;
 end;
 
+procedure Tview_Main.actionSenhaExecute(Sender: TObject);
+begin
+  if not Assigned(view_AlteraSenha) then
+  begin
+    view_AlteraSenha := Tview_AlteraSenha.Create(Application);
+  end;
+  if view_AlteraSenha.ShowModal = mrCancel then
+  begin
+    Application.MessageBox('Alteração de senha cancelada!','Atenção', MB_OK + MB_ICONASTERISK);
+  end;
+  FreeAndNil(view_AlteraSenha);
+end;
+
 procedure Tview_Main.FormClose(Sender: TObject; var Action: TCloseAction);
 begin
   Action := caFree;
@@ -95,8 +111,28 @@ end;
 procedure Tview_Main.FormShow(Sender: TObject);
 begin
   Self.Caption := Application.Title;
-  Login;
   Resizeform;
+  InitSis;
+  Login;
+end;
+
+procedure Tview_Main.InitSis;
+var
+  sFile : String;
+  sHost: String;
+  sTitulo: String;
+begin
+  sFile := ExtractFilePath(Application.ExeName)+ '\host.ini';
+  if not FileExists(sFile) then
+  begin
+    Application.MessageBox('Arquivo de inicialização não encontrado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
+    Application.Terminate;
+    Exit;
+  end;
+  sHost := Common.Utils.TUtils.LeIni(sFile, 'Database','Hostname');
+  Common.Params.paramBaseURL := sHost;
+  sTitulo := Self.Caption + ' - Versão ' + Common.Utils.TUtils.VersaoExe;
+  Self.Caption := sTitulo;
 end;
 
 procedure Tview_Main.Login;
@@ -111,12 +147,12 @@ begin
   end;
 
   Common.Params.paramTipoUsuario := 'X';
-  statusBarMain.Panels[1].Text := 'Usuário: ' + Global.Parametros.pUser_Name;
+  statusBarMain.Panels[1].Text := 'Usuário: ' + Global.Parametros.pNameUser;
   if Common.Params.paramCodeDelivery <> 0 then
   begin
     Common.Params.paramTipoUsuario := 'B';
     NomeAgente(Common.Params.paramCodeDelivery);
-    statusBarMain.Panels[0].Text := 'Base: ' + Common.Params.paramCodeDelivery.ToString + ' - ' + Common.Params.paramNameUser;
+    statusBarMain.Panels[0].Text := 'Base: ' + Common.Params.paramCodeDelivery.ToString + ' - ' + Common.Params.paramNomeBase;
   end
   else if Common.Params.paramCodigoEntregador <> 0 then
   begin
@@ -163,10 +199,10 @@ end;
 
 procedure Tview_Main.Resizeform;
 begin
-  Self.Top := 0;
-  Self.Left := 0;
-  Self.Width := Screen.WorkAreaWidth;
-  Self.Height := Screen.WorkAreaHeight;
+  Self.Top    :=  0;
+  Self.Left   :=  0;
+  Self.Height :=  Screen.WorkAreaHeight;
+  Self.Width  :=  Screen.WorkAreaWidth;
 end;
 
 procedure Tview_Main.timerTimer(Sender: TObject);

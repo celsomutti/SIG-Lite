@@ -22,6 +22,8 @@ uses Common.Params, dm.SIGLite;
 { TRESTLancamentos }
 
 function TRESTLancamentos.SearchLancamentosExtrato(sextrato: String): Boolean;
+var
+  sResult : String;
 begin
   Result  := False;
   StartRestRequest('/sl_lancamentos.php');
@@ -30,6 +32,11 @@ begin
   dm_SIGLite.RESTResponseDataSetAdapter.Active := True;
   dm_SIGLite.RESTRequest.Execute;
   if dm_SIGLite.memTableLancamentos.IsEmpty then Exit;
+  sResult := dm_SIGLite.memTableLancamentos.Fields[0].Value;
+  if sResult = 'False' then
+  begin
+    Exit;
+  end;
   Result := True;
 end;
 

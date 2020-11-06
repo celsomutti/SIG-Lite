@@ -34,7 +34,8 @@ uses
   Model.RESTLancamentos in 'model\Model.RESTLancamentos.pas',
   Controller.RESTLancamentos in 'controller\Controller.RESTLancamentos.pas',
   Model.RESTCadastro in 'model\Model.RESTCadastro.pas',
-  Controller.RESTCadastro in 'controller\Controller.RESTCadastro.pas';
+  Controller.RESTCadastro in 'controller\Controller.RESTCadastro.pas',
+  View.AlteraSenha in 'view\View.AlteraSenha.pas' {view_AlteraSenha};
 
 {$R *.res}
 

@@ -14,11 +14,17 @@ type
     function SalvaCadastro(sCpfCnpj, sUserName, sName, sPassword, sEmail: String): boolean;
     function UsuarioExiste(sCPF: String): Boolean;
     function CPFValido(sCPF: string): boolean;
+    function AlteraSenha(sSenha, sID: String): boolean;
   end;
 
 implementation
 
 { TRESTCadastroController }
+
+function TRESTCadastroController.AlteraSenha(sSenha, sID: String): boolean;
+begin
+  Result := FCadastro.AlteraSenha(sSenha,sID);
+end;
 
 function TRESTCadastroController.CPFValido(sCPF: string): boolean;
 begin

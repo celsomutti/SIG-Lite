@@ -815,6 +815,7 @@ object view_Main: Tview_Main
       Caption = 'Senha'
       Hint = 'Alterar a senha'
       ImageIndex = 2
+      OnExecute = actionSenhaExecute
     end
     object actionFechar: TAction
       Caption = '&Fechar'

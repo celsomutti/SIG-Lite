@@ -157,7 +157,7 @@ begin
   begin
     Application.MessageBox('CPF já cadastrado!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
   end;
-  if ValidaEntregadorAtivo(buttonEditCPF.Text) then
+  if not ValidaEntregadorAtivo(buttonEditCPF.Text) then
   begin
     Application.MessageBox('Entregador sem acesso ao sistema!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
   end;
@@ -200,14 +200,16 @@ var
   FCadastro: TRESTCadastroController;
   FLogin: TRESTLoginController;
   FUsuarioAgente: TRESTLoginAgenteController;
+  FEntregadores: TRESTEntregadoresController;
   sCPF, sUsername, sName, sSenha, sEmail: String;
-  iID: Integer;
+  iID, iCodigo: Integer;
 begin
   try
     Result := False;
     FCadastro := TRESTCadastroController.Create;
     FLogin := TRESTLoginController.Create;
     FUsuarioAgente := TRESTLoginAgenteController.Create;
+    FEntregadores := TRESTEntregadoresController.Create;
     sCPF := buttonEditCPF.Text;
     sUsername := buttonEditCPF.Text;
     sName := textEditNome.Text;
@@ -220,19 +222,24 @@ begin
     end;
     iID := 0;
     iID := FLogin.CodigoUsuario(sCPF);
+    iCodigo := 0;
+    iCodigo := FEntregadores.RetornaCodigoEntregador(sCPF);
     if iID = 0 then
     begin
       Application.MessageBox('CPF de usuário não encontrado!', 'Atenção', MB_OK + MB_ICONWARNING);
       Exit;
     end;
-    if not FUsuarioAgente.GravaUsuarioEntregador(iID.ToString,Common.Params.paramCodigoEntregador.ToString) then
+    if not FUsuarioAgente.GravaUsuarioEntregador(iID.ToString,iCodigo.ToString) then
     begin
       Application.MessageBox('Ocorreu um problemna ao tentar vincular o usuário ao entregador!', 'Atenção', MB_OK + MB_ICONWARNING);
       Exit;
     end;
     Result := True;
   finally
-    FCadastro.Create;
+    FCadastro.Free;
+    FLogin.Free;
+    FUsuarioAgente.Free;
+    FEntregadores.Free;
   end;
 end;
 
@@ -296,7 +303,7 @@ begin
     buttonEditCPF.SetFocus;
     Exit;
   end;
-  if ValidaEntregadorAtivo(buttonEditCPF.Text) then
+  if not ValidaEntregadorAtivo(buttonEditCPF.Text) then
   begin
     Application.MessageBox('Entregador sem acesso ao sistema!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     buttonEditCPF.SetFocus;
@@ -320,12 +327,12 @@ begin
     textEditEMail.SetFocus;
     Exit;
   end;
-  if not Common.Utils.TUtils.ValidaEMail(PChar(textEditEMail.Text)) then
+  {if not Common.Utils.TUtils.ValidaEMail(PChar(textEditEMail.Text)) then
   begin
     Application.MessageBox('Endereço de E-Mail inválido!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);
     textEditEMail.SetFocus;
     Exit;
-  end;
+  end;}
   if buttonEditNovaSenha.Text = '' then
   begin
     Application.MessageBox('Informe uma senha!', 'Atenção', MB_OK + MB_ICONEXCLAMATION);

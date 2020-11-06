@@ -12,6 +12,7 @@ type
   public
     function RetornaNomeEntregador(iEntregador: Integer): boolean;
     function CPFEntregador(sCPF: String): boolean;
+    function RetornaCodigoEntregador(sCPF: String): Integer;
   end;
 const
   API = '/api/SIGLite';
@@ -74,6 +75,37 @@ begin
   Result := True;
 end;
 
+function TRESTEntregadores.RetornaCodigoEntregador(sCPF: String): Integer;
+var
+  jsonObj, jo: TJSONObject;
+  jvCodigo: TJSONValue;
+  ja: TJSONArray;
+  sretorno: string;
+  iRetorno : integer;
+begin
+  Result  := 0;
+  StartRestRequest('/sl_cpf_entregador.php');
+  dm_SIGLite.RESTRequest.AddParameter('cpf', sCPF, pkGETorPOST);
+  dm_SIGLite.RESTRequest.Execute;
+  sretorno := dm_SIGLite.RESTRequest.Response.JSONText;
+  if sretorno = 'false' then
+  begin
+    Exit;
+  end;
+  if dm_SIGLite.RESTResponse.JSONValue is TJSONArray then
+  begin
+    ja := dm_SIGLite.RESTResponse.JSONValue as TJSONArray;
+    jsonObj := (ja.Get(0) as TJSONObject);
+    jvCodigo := jsonObj.Get(1).JsonValue;
+    iRetorno := StrToIntDef(jvCodigo.Value,0);
+  end
+  else
+  begin
+    Exit;
+  end;
+  Result := iRetorno;
+end;
+
 function TRESTEntregadores.RetornaNomeEntregador(iEntregador: Integer): boolean;
 var
   jsonObj, jo: TJSONObject;
@@ -83,7 +115,7 @@ var
   sretorno: string;
 begin
   Result  := False;
-  StartRestRequest('/sl_Entregadores.php');
+  StartRestRequest('/sl_entregadores.php');
   dm_SIGLite.RESTRequest.AddParameter('entregador', iEntregador.ToString, pkGETorPOST);
   dm_SIGLite.RESTRequest.Execute;
   sretorno := dm_SIGLite.RESTRequest.Response.JSONText;

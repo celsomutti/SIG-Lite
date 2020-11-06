@@ -13,6 +13,7 @@ type
     destructor Destroy; override;
     function RetornaNomeEntregador(iEntregador: Integer): boolean;
     function CPFEntregador(sCPF: String): boolean;
+    function RetornaCodigoEntregador(sCPF: String): Integer;
   end;
 
 implementation
@@ -33,6 +34,11 @@ destructor TRESTEntregadoresController.Destroy;
 begin
   FEntregadores.Free;
   inherited;
+end;
+
+function TRESTEntregadoresController.RetornaCodigoEntregador(sCPF: String): Integer;
+begin
+  Result := FEntregadores.RetornaCodigoEntregador(sCPF);
 end;
 
 function TRESTEntregadoresController.RetornaNomeEntregador(iEntregador: Integer): boolean;

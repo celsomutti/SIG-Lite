@@ -1,5 +1,6 @@
 object dm_SIGLite: Tdm_SIGLite
   OldCreateOrder = False
+  OnCreate = DataModuleCreate
   Height = 384
   Width = 772
   object imageListMain: TcxImageList
@@ -758,5 +759,9 @@ object dm_SIGLite: Tdm_SIGLite
     UpdateOptions.AutoCommitUpdates = True
     Left = 504
     Top = 16
+  end
+  object cxLocalizer: TcxLocalizer
+    Left = 680
+    Top = 144
   end
 end
