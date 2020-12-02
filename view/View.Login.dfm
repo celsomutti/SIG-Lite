@@ -1076,7 +1076,7 @@ object view_login: Tview_login
       OnExecute = actionCancelarCadastroExecute
     end
     object actionCadastro: TAction
-      Caption = 'Cadraste-se'
+      Caption = 'Cadastre-se'
       Hint = 'Clique aqui para se cadastrar'
       OnExecute = actionCadastroExecute
     end

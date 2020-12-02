@@ -6,7 +6,7 @@
         <MainSource>SIGLite.dpr</MainSource>
         <Base>True</Base>
         <Config Condition="'$(Config)'==''">Debug</Config>
-        <Platform Condition="'$(Platform)'==''">Win64</Platform>
+        <Platform Condition="'$(Platform)'==''">Win32</Platform>
         <TargetedPlatforms>3</TargetedPlatforms>
         <AppType>Application</AppType>
     </PropertyGroup>
@@ -107,9 +107,9 @@
         <Icon_MainIcon>SIGLite_Icon.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>image\logo_44_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>image\logo_150_150.png</UWP_DelphiLogo150>
-        <VerInfo_Keys>CompanyName=Alô Carioca Serviços e Entregas e Transportes Ltda.;FileDescription=$(MSBuildProjectName);FileVersion=1.0.32.1;InternalName=SIG Lite;LegalCopyright=2020 © Alô Carioca;LegalTrademarks=;OriginalFilename=;ProgramID=com.novorioexpress.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=32 bits</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Alô Carioca Serviços e Entregas e Transportes Ltda.;FileDescription=$(MSBuildProjectName);FileVersion=1.0.32.2;InternalName=SIG Lite;LegalCopyright=2020 © Alô Carioca;LegalTrademarks=;OriginalFilename=;ProgramID=com.novorioexpress.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=32 bits</VerInfo_Keys>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
-        <VerInfo_Build>1</VerInfo_Build>
+        <VerInfo_Build>2</VerInfo_Build>
         <VerInfo_Release>32</VerInfo_Release>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_1_Win64)'!=''">
@@ -117,12 +117,13 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=Alô Carioca Serviços de Entregas e Transportes Ltda;FileDescription=$(MSBuildProjectName);FileVersion=1.0.64.0;InternalName=SIG Lite;LegalCopyright=2020 © Alô Carioca;LegalTrademarks=;OriginalFilename=;ProgramID=com.novorioexpress.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=64 bits</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Alô Carioca Serviços de Entregas e Transportes Ltda;FileDescription=$(MSBuildProjectName);FileVersion=1.0.64.2;InternalName=SIG Lite;LegalCopyright=2020 © Alô Carioca;LegalTrademarks=;OriginalFilename=;ProgramID=com.novorioexpress.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=64 bits</VerInfo_Keys>
         <VerInfo_AutoIncVersion>true</VerInfo_AutoIncVersion>
         <Icon_MainIcon>SIGLite_Icon1.ico</Icon_MainIcon>
         <VerInfo_Release>64</VerInfo_Release>
         <UWP_DelphiLogo44>image\logo_44_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>image\logo_150_150.png</UWP_DelphiLogo150>
+        <VerInfo_Build>2</VerInfo_Build>
     </PropertyGroup>
     <PropertyGroup Condition="'$(Cfg_2)'!=''">
         <DCC_LocalDebugSymbols>false</DCC_LocalDebugSymbols>
