@@ -133,6 +133,7 @@ var
   sTipo, scodigo, sdataini, sdatafim: String;
 begin
   try
+    Screen.Cursor := crHourGlass;
     FEntregas := TRESTEntregassController.Create;
     if dm_SIGLite.fdMemTabEntregas.Active then
     begin
@@ -166,6 +167,7 @@ begin
       cxGrid.SetFocus;
     end;
   finally
+    Screen.Cursor := crDefault;
     FEntregas.Free;
   end;
 end;

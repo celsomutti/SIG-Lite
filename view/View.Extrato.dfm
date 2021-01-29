@@ -3,7 +3,7 @@ object view_Extrato: Tview_Extrato
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Extrato'
-  ClientHeight = 549
+  ClientHeight = 482
   ClientWidth = 950
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -24,7 +24,7 @@ object view_Extrato: Tview_Extrato
     Left = 0
     Top = 0
     Width = 950
-    Height = 549
+    Height = 482
     Align = alClient
     TabOrder = 0
     object comboBoxTipo: TcxComboBox
@@ -109,7 +109,7 @@ object view_Extrato: Tview_Extrato
       Left = 13
       Top = 130
       Width = 924
-      Height = 213
+      Height = 146
       TabOrder = 6
       object cxGridDBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
@@ -206,7 +206,7 @@ object view_Extrato: Tview_Extrato
     end
     object buttonExportar: TcxButton
       Left = 13
-      Top = 511
+      Top = 444
       Width = 94
       Height = 25
       Cursor = crHandPoint
@@ -215,7 +215,7 @@ object view_Extrato: Tview_Extrato
     end
     object buttonFechar: TcxButton
       Left = 843
-      Top = 511
+      Top = 444
       Width = 94
       Height = 25
       Cursor = crHandPoint
@@ -237,7 +237,7 @@ object view_Extrato: Tview_Extrato
     end
     object cxGridExtravios: TcxGrid
       Left = 13
-      Top = 374
+      Top = 307
       Width = 458
       Height = 129
       TabOrder = 7
@@ -257,7 +257,7 @@ object view_Extrato: Tview_Extrato
     end
     object cxGridLancamentos: TcxGrid
       Left = 479
-      Top = 374
+      Top = 307
       Width = 458
       Height = 129
       TabOrder = 8

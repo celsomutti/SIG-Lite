@@ -255,6 +255,7 @@ var
   sTipo, scodigo, sAno, sMes, sQuinzena: String;
 begin
   try
+    Screen.Cursor := crHourGlass;
     FExtrato := TRESTExtratosController.Create;
     if dm_SIGLite.memTableExtrato.Active then
     begin
@@ -296,6 +297,7 @@ begin
       end;
     end;
   finally
+    Screen.Cursor := crDefault;
     FExtrato.Free;
   end;
 end;
@@ -362,6 +364,7 @@ var
   sTipo, scodigo, sdataini, sdatafim: String;
 begin
   try
+    Screen.Cursor := crHourGlass;
     FEntregas := TRESTPreviaExtratoController.Create;
     if dm_SIGLite.fdMemTableExtrato.Active then
     begin
@@ -400,6 +403,7 @@ begin
       end;
     end;
   finally
+    Screen.Cursor := crDefault;
     FEntregas.Free;
   end;
 end;

@@ -3,7 +3,7 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
   Top = 0
   BorderIcons = [biSystemMenu]
   Caption = 'Acompanhamento de Entregas Realizadas'
-  ClientHeight = 581
+  ClientHeight = 503
   ClientWidth = 1123
   Color = clBtnFace
   Font.Charset = ANSI_CHARSET
@@ -24,9 +24,10 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
     Left = 0
     Top = 0
     Width = 1123
-    Height = 581
+    Height = 503
     Align = alClient
     TabOrder = 0
+    ExplicitHeight = 581
     object comboBoxMeses: TcxComboBox
       Left = 129
       Top = 59
@@ -101,7 +102,7 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
       Left = 13
       Top = 130
       Width = 1097
-      Height = 405
+      Height = 327
       TabOrder = 5
       object cxGridDBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
@@ -132,7 +133,7 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
     end
     object buttonExportar: TcxButton
       Left = 13
-      Top = 543
+      Top = 465
       Width = 92
       Height = 25
       Cursor = crHandPoint
@@ -141,7 +142,7 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
     end
     object buttonFechar: TcxButton
       Left = 1016
-      Top = 543
+      Top = 465
       Width = 94
       Height = 25
       Cursor = crHandPoint
