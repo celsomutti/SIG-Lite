@@ -830,10 +830,11 @@ object view_Main: Tview_Main
     Top = 248
   end
   object dxTabbedMDIManager: TdxTabbedMDIManager
-    Active = False
+    Active = True
     LookAndFeel.SkinName = 'UserSkin'
     FormCaptionMask = '[MainFormCaption]'
     TabProperties.CustomButtons.Buttons = <>
+    TabProperties.ShowFrame = True
     Left = 581
     Top = 184
     PixelsPerInch = 96

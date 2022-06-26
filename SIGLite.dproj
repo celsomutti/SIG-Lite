@@ -136,9 +136,9 @@
         <AppDPIAwarenessMode>PerMonitorV2</AppDPIAwarenessMode>
         <VerInfo_IncludeVerInfo>true</VerInfo_IncludeVerInfo>
         <VerInfo_MinorVer>32</VerInfo_MinorVer>
-        <VerInfo_Release>1</VerInfo_Release>
+        <VerInfo_Release>2</VerInfo_Release>
         <VerInfo_Locale>1033</VerInfo_Locale>
-        <VerInfo_Keys>CompanyName=Alô Carioca Serv. de Entregas e Transportes Ltda;FileDescription=$(MSBuildProjectName);FileVersion=1.32.1.0;InternalName=SIGLite;LegalCopyright=©2020 - Novo Rio Express;LegalTrademarks=;OriginalFilename=;ProgramID=com.novorioexpress.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
+        <VerInfo_Keys>CompanyName=Alô Carioca Serv. de Entregas e Transportes Ltda;FileDescription=$(MSBuildProjectName);FileVersion=1.32.2.0;InternalName=SIGLite;LegalCopyright=©2020 - Novo Rio Express;LegalTrademarks=;OriginalFilename=;ProgramID=com.novorioexpress.$(MSBuildProjectName);ProductName=$(MSBuildProjectName);ProductVersion=1.0.0.0;Comments=</VerInfo_Keys>
         <Icon_MainIcon>image\logo_novorioexpress.ico</Icon_MainIcon>
         <UWP_DelphiLogo44>image\logo_44_44.png</UWP_DelphiLogo44>
         <UWP_DelphiLogo150>image\logo_150_150.png</UWP_DelphiLogo150>

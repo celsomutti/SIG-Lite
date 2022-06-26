@@ -1,7 +1,6 @@
 object view_Extrato: Tview_Extrato
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu]
   Caption = 'Extrato'
   ClientHeight = 482
   ClientWidth = 950
@@ -11,11 +10,10 @@ object view_Extrato: Tview_Extrato
   Font.Height = -13
   Font.Name = 'Segoe UI'
   Font.Style = []
-  FormStyle = fsMDIChild
   KeyPreview = True
   OldCreateOrder = False
+  Position = poDesktopCenter
   ShowHint = True
-  Visible = True
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
@@ -114,7 +112,43 @@ object view_Extrato: Tview_Extrato
       object cxGridDBTableView1: TcxGridDBTableView
         Navigator.Buttons.CustomButtons = <>
         DataController.DataSource = dsGrid
-        DataController.Summary.DefaultGroupSummaryItems = <>
+        DataController.Summary.DefaultGroupSummaryItems = <
+          item
+            Format = ',0;-,0'
+            Kind = skSum
+            Position = spFooter
+            Column = cxGridDBTableView1qtd_entrega
+          end
+          item
+            Format = ',0.00;-,0.00'
+            Kind = skSum
+            Position = spFooter
+            Column = cxGridDBTableView1val_creditos
+          end
+          item
+            Format = ',0.00;-,0.00'
+            Kind = skSum
+            Position = spFooter
+            Column = cxGridDBTableView1val_debitos
+          end
+          item
+            Format = ',0.00;-,0.00'
+            Kind = skSum
+            Position = spFooter
+            Column = cxGridDBTableView1val_extravios
+          end
+          item
+            Format = ',0.00;-,0.00'
+            Kind = skSum
+            Position = spFooter
+            Column = cxGridDBTableView1val_producao
+          end
+          item
+            Format = ',0.00;-,0.00'
+            Kind = skSum
+            Position = spFooter
+            Column = cxGridDBTableView1val_total
+          end>
         DataController.Summary.FooterSummaryItems = <
           item
             Format = ',0.00;-,0.00'
@@ -150,6 +184,7 @@ object view_Extrato: Tview_Extrato
         OptionsView.ColumnAutoWidth = True
         OptionsView.Footer = True
         OptionsView.GroupByBox = False
+        OptionsView.GroupFooters = gfAlwaysVisible
         object cxGridDBTableView1cod_entregador: TcxGridDBColumn
           DataBinding.FieldName = 'cod_entregador'
           Width = 59
@@ -189,6 +224,11 @@ object view_Extrato: Tview_Extrato
           DataBinding.FieldName = 'val_total'
           Visible = False
           Width = 121
+        end
+        object cxGridDBTableView1nom_cliente: TcxGridDBColumn
+          DataBinding.FieldName = 'nom_cliente'
+          Visible = False
+          GroupIndex = 0
         end
       end
       object cxGridLevel1: TcxGridLevel
@@ -280,12 +320,13 @@ object view_Extrato: Tview_Extrato
       AlignVert = avClient
       ButtonOptions.Buttons = <>
       Hidden = True
-      ItemIndex = 2
       ShowBorder = False
       Index = -1
     end
     object layoutGroupHeader: TdxLayoutGroup
       Parent = layoutControlPadraoGroup_Root
+      AlignHorz = ahClient
+      AlignVert = avTop
       CaptionOptions.Text = 'Crit'#233'rios'
       ButtonOptions.Buttons = <>
       LayoutDirection = ldHorizontal
@@ -384,6 +425,7 @@ object view_Extrato: Tview_Extrato
     end
     object dxLayoutAutoCreatedGroup1: TdxLayoutAutoCreatedGroup
       Parent = layoutControlPadraoGroup_Root
+      AlignHorz = ahClient
       AlignVert = avBottom
       LayoutDirection = ldHorizontal
       Index = 3
@@ -430,6 +472,7 @@ object view_Extrato: Tview_Extrato
     end
     object dxLayoutAutoCreatedGroup2: TdxLayoutAutoCreatedGroup
       Parent = layoutControlPadraoGroup_Root
+      AlignHorz = ahClient
       AlignVert = avTop
       LayoutDirection = ldHorizontal
       Index = 2
@@ -475,6 +518,7 @@ object view_Extrato: Tview_Extrato
     UpdateOptions.CheckRequired = False
     UpdateOptions.AutoCommitUpdates = True
     Left = 664
+    Top = 32
     object fdMemTablePreviacod_entregador: TIntegerField
       DisplayLabel = 'C'#243'digo'
       FieldName = 'cod_entregador'
@@ -518,6 +562,11 @@ object view_Extrato: Tview_Extrato
       DisplayLabel = 'Total'
       FieldName = 'val_total'
       DisplayFormat = ',0.00;-,0.00'
+    end
+    object fdMemTablePrevianom_cliente: TStringField
+      DisplayLabel = 'Cliente'
+      FieldName = 'nom_cliente'
+      Size = 70
     end
   end
   object dsExtravios: TDataSource

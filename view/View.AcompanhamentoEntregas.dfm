@@ -1,7 +1,6 @@
 object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
   Left = 0
   Top = 0
-  BorderIcons = [biSystemMenu]
   Caption = 'Acompanhamento de Entregas Realizadas'
   ClientHeight = 503
   ClientWidth = 1123
@@ -11,11 +10,10 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
   Font.Height = -13
   Font.Name = 'Segoe UI'
   Font.Style = []
-  FormStyle = fsMDIChild
   KeyPreview = True
   OldCreateOrder = False
+  Position = poDesktopCenter
   ShowHint = True
-  Visible = True
   OnClose = FormClose
   OnShow = FormShow
   PixelsPerInch = 96
@@ -27,7 +25,6 @@ object view_AcompanhamntoEntregas: Tview_AcompanhamntoEntregas
     Height = 503
     Align = alClient
     TabOrder = 0
-    ExplicitHeight = 581
     object comboBoxMeses: TcxComboBox
       Left = 129
       Top = 59

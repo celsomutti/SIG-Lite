@@ -75,6 +75,8 @@ type
     dsExtravios: TDataSource;
     dxLayoutAutoCreatedGroup2: TdxLayoutAutoCreatedGroup;
     dsLancamentos: TDataSource;
+    fdMemTablePrevianom_cliente: TStringField;
+    cxGridDBTableView1nom_cliente: TcxGridDBColumn;
     procedure FormShow(Sender: TObject);
     procedure FormClose(Sender: TObject; var Action: TCloseAction);
     procedure actionPesquisarExecute(Sender: TObject);
@@ -92,6 +94,7 @@ type
     procedure ExportarDados;
     function PopulaPreviaExtrato(): Boolean;
     function PopulaExtrato(): Boolean;
+    procedure ListYears;
   public
     { Public declarations }
   end;
@@ -161,7 +164,8 @@ end;
 
 procedure Tview_Extrato.FormShow(Sender: TObject);
 begin
-  SetupAno;
+  ListYears;
+//  SetupAno;
   PopulaPeriodos;
   if Common.Params.paramTipoUsuario = 'B' then
   begin
@@ -172,6 +176,21 @@ begin
     layoutItemButtonExportar.Visible := False;
   end;
 
+end;
+
+procedure Tview_Extrato.ListYears;
+var
+  i, iInicial, iTotalYears: integer;
+begin
+  iInicial := YearOf(Now) - 5;
+  iTotalYears := YearOf(Now) + 5;
+  comboBoxAno.Properties.Items.Clear;
+  for i := iInicial to iTotalYears do
+  begin
+    comboBoxAno.Properties.Items.Add(i.ToString);
+  end;
+  comboBoxAno.Text := IntToStr(YearOf(now));
+  comboBoxMeses.ItemIndex := Pred(MonthOf(Now));
 end;
 
 procedure Tview_Extrato.MontaPeriodo(iAno, iMes, iQuinzena: Integer);
@@ -289,6 +308,7 @@ begin
       begin
         PesquisaExtravios(sExtratos);
         PesquisaLancamentos(sExtratos);
+        cxGridDBTableView1.ViewData.Expand(True);
         cxGrid.SetFocus;
       end
       else
@@ -395,6 +415,7 @@ begin
                               FormatDateTime('dd/mm/yyyy', dtDataFinal);
       if PopulaPreviaExtrato() then
       begin
+        cxGridDBTableView1.ViewData.Expand(True);
         cxGrid.SetFocus;
       end
       else
@@ -422,6 +443,7 @@ begin
     fdMemTablePreviaval_verba.AsFloat := StrToFloatDef(StringReplace(dm_SIGLite.fdMemTableExtrato.Fields[2].AsString,'.',',',[rfReplaceAll]), 0);
     fdMemTablePreviaqtd_entrega.AsInteger := dm_SIGLite.fdMemTableExtrato.Fields[3].AsInteger;
     fdMemTablePreviaval_producao.AsFloat := StrToFloatDef(StringReplace(dm_SIGLite.fdMemTableExtrato.Fields[4].AsString,'.',',',[rfReplaceAll]), 0);
+    fdMemTablePrevianom_cliente.AsString := dm_SIGLite.fdMemTableExtrato.Fields[5].AsString;
     fdMemTablePrevia.Post;
     dm_SIGLite.fdMemTableExtrato.Next;
   end;
@@ -447,6 +469,7 @@ begin
     fdMemTablePreviaval_debitos.AsFloat := StrToFloatDef(StringReplace(dm_SIGLite.memTableExtrato.Fields[19].AsString,'.',',',[rfReplaceAll]), 0);
     fdMemTablePreviaval_extravios.AsFloat := StrToFloatDef(StringReplace(dm_SIGLite.memTableExtrato.Fields[20].AsString,'.',',',[rfReplaceAll]), 0);
     fdMemTablePreviaval_total.AsFloat := StrToFloatDef(StringReplace(dm_SIGLite.memTableExtrato.Fields[21].AsString,'.',',',[rfReplaceAll]), 0);
+    fdMemTablePrevianom_cliente.AsString := dm_SIGLite.memTableExtrato.Fields[26].AsString;
     fdMemTablePrevia.Post;
     if sExtratos <> '' then
     begin

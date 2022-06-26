@@ -56,6 +56,7 @@ type
     procedure SetupAno();
     procedure PesquisaEntregas();
     procedure ExportarDados;
+    procedure ListYears;
   public
     { Public declarations }
   end;
@@ -114,7 +115,8 @@ end;
 
 procedure Tview_AcompanhamntoEntregas.FormShow(Sender: TObject);
 begin
-  SetupAno;
+  ListYears;
+//  SetupAno;
   PopulaPeriodos;
   cxGridDBTableView1.ClearItems;
   if Common.Params.paramTipoUsuario = 'B' then
@@ -125,6 +127,21 @@ begin
   begin
     layoutItemButtonExportar.Visible := False;
   end;
+end;
+
+procedure Tview_AcompanhamntoEntregas.ListYears;
+var
+  i, iInicial, iTotalYears: integer;
+begin
+  iInicial := YearOf(Now) - 5;
+  iTotalYears := YearOf(Now) + 5;
+  comboBoxAno.Properties.Items.Clear;
+  for i := iInicial to iTotalYears do
+  begin
+    comboBoxAno.Properties.Items.Add(i.ToString);
+  end;
+  comboBoxAno.Text := IntToStr(YearOf(now));
+  comboBoxMeses.ItemIndex := Pred(MonthOf(Now));
 end;
 
 procedure Tview_AcompanhamntoEntregas.PesquisaEntregas;
